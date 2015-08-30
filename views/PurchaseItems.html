@@ -1,0 +1,84 @@
+﻿ <div ng-controller="PurchaseItemsController">
+  
+     <div class="whiteSlider">
+         <div class="row"  >
+             <div class="col-sm-6">
+             <h2 class="page-header" translate="PurchasedItems"> </h2>
+                 <a href="#" ui-sref="Home" class="back-to-list">
+                     <i class="fa fa-arrow-left fa-1x"></i><label translate="back" class="pointer-curser">back</label>
+                 </a>
+             </div>
+            
+           
+            
+         </div>
+         
+         <div class="   col-md-9 col-sm-7 plans-container  ">
+
+             <div class="row   show-hide-animation">
+
+                 <div class="col-sm-6  card-animation" ng-repeat="item in PurchaseItems">
+                     <div class="purchased-card-item">
+                         <div class="cardBody">
+                             <div class="clearfix">
+                                 <div class="store-card-image">
+                                     <a href="#" ng-click="goDetails(item)" class="white"> <img ng-src="{{item.Picture}}" /></a>
+                                 </div>
+                                 <div class="purchased-card-color">
+                                     <!--<a href="#" ng-click="goDetails(item)" class="store-list-header"> {{item.DisplayName }}</a>-->
+                                     <div class=" store-card-details">
+                                         <div class="store-card-header pointer-curser text-center-sm">
+                                             <h2 ng-click="goDetails(item)">{{item.DisplayName }}</h2>
+                                         </div>
+
+
+                                          
+
+
+                                         <div class="details-price pointer-curser" ng-click="openModal(item)">
+                                             <strong>
+                                                 <i class="fa fa-info"></i>  <label translate="clickToReset"></label>
+                                             </strong>
+                                         </div>
+
+
+
+                                          
+
+                                     </div>
+                                 </div>
+                             </div>
+                         </div>
+
+                     </div>
+                 </div>
+             </div>
+
+         </div>
+          
+          
+     </div> 
+     <script type="text/ng-template" id="myModalContent.html">
+         <div id="ReApplyPlanDiv" tabindex="-1" role="dialog" aria-hidden="true">
+            
+                 <div class="modal-content">
+                     <div class="modal-header">
+                         <button type="button" class="close" ng-click="cancel()"  aria-hidden="true">&times;</button>
+                         <h4 class="modal-title" translate="resetPlan"> </h4>
+                     </div>
+                     <div class="modal-body">
+                         <div class="row" translate="areYouSureToReapply">
+                            
+
+                         </div>
+                     </div>
+                     <div class="modal-footer">
+                         <button type="button" class="btn btn-primary" id="applyButton" data-dismiss="modal" ng-click="ok()">Reapply</button>
+                         <button type="button" class="btn btn-default" ng-click="cancel()">Close</button>
+                     </div>
+                 </div>
+              
+         </div>
+     </script>
+
+ </div>

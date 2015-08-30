@@ -1,0 +1,41 @@
+﻿  
+<hr />
+<div class="row cardContainer show-hide-animation">
+     
+
+    <div class="col-sm-6 col-md-4 col-weeks-list card-animation  " ng-repeat="item in  getNumberWeek( WorkoutDetails.PlanDurationInWeek) track by $index">
+        <a href="#" ui-sref="WorkoutDetails.list({weekID:$index+1})" ng-show="WorkoutDetails.Price ==0|| $index==0 ||isPurchased">
+            <div class="details-card   " ng-style="{{ $index==0||weeksStyle()}}">
+                <div class="week-card-body">
+                    <div class="clearfix">
+                        <div class="card-week-icon ">
+
+                            <i class="fa fa-calendar-o fa-3x"></i>
+
+                        </div>
+                        <span ng-bind="getWeekText($index+1)" class="card-week-name">week</span>
+
+                    </div>
+                </div>
+
+            </div>
+        </a>
+        <div ng-hide="WorkoutDetails.Price ==0|| $index==0 ||isPurchased">
+            <div class="details-card   " ng-style="{{ $index==0||weeksStyle()}}">
+                <div class="week-card-body">
+                    <div class="clearfix">
+                        <div class="card-week-icon ">
+
+                            <i class="fa fa-calendar-o fa-3x"></i>
+
+                        </div>
+                        <span ng-bind="getWeekText($index+1)" class="card-week-name">week</span>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>

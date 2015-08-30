@@ -1,0 +1,400 @@
+﻿ 
+<div ng-controller="WorkoutDetailsListController" ng-init="startDetailsList()">
+     
+    <div id=" " class=" whiteSlider">
+         
+            
+          
+            <div class=" ">
+                <div class="details-list-header">
+                    <a href="#" class="col-md-1" ui-sref="WorkoutDetails.mian " ng-show="WeekNum!=-1">
+                        <i class="fa fa-arrow-left fa-2x"></i>
+                    </a>
+                    <p  >
+
+                        <strong class="red">WORKOUT DETAILS</strong>
+
+                    </p>
+                </div>
+                <div class="b-workout-program-day-exercises" >
+                   
+                    <div ng-repeat=" item in  WorkoutDetails.Workouts  " ng-class="$first||priceClass">
+                        <div class="b-workout-program-day-title">
+                           <label translate="day"></label>   {{ ::item.DayNum}}: &nbsp;<label translate="workoutnum"></label>   {{$index+1}}
+                            <a ng-hide="StoreItem.isPurchased  ||StoreItem.Price==0"><label class="buy-plan-alert">you have to Buy the Plan to see The Details !</label></a>
+                        </div> 
+                        <div ng-show="WeekNum!=-1||StoreItem.isPurchased  ||StoreItem.Price==0 ">
+                            <!-- if it is a one day workout , don't show the details  -->
+
+                            <div ng-repeat="Excercise in item.Workout.WorkoutExercises">
+
+                                <!-- weight Exercises -->
+                                <div ng-show="Excercise.WeightExercises">
+                                    <div class="b-workout-part--item" ng-repeat="Weight in Excercise.WeightExercises">
+                                        <div class="b-workout-part--media   pointer-curser" fancybox ng-click="openFancybox( Weight.ItemVideoMale||Weight.ItemVideoFemale )">
+                                            <a class="exercise-thumb exercise-thumb--with-play fancybox-link">
+                                                <img typeof="foaf:Image" ng-src=" {{Weight.ImagePath}}" alt="leg press thumbnail" title="Starter&amp;#039;s Guide Leg Press thumbnail">
+                                            </a>
+
+                                        </div>
+                                        <div class="b-workout-part--description">
+                                            <h4 class="b-workout-part--exercise-count" translate="Weight" translate-values="{value: $index +1}">   <!--{{$index +1}}--></h4>
+                                            <strong class="b-workout-part--promo-title">{{Weight.ExcerciseName}}</strong>
+                                            <span class="b-workout-part--how-to"><a ng-href="{{Weight.ExerciseLink}} " target="_blank"><label translate="howTo"></label> </a></span>
+                                        </div>
+
+                                        <div class="b-workout-part--instructions">
+                                            <div class="b-workout-part--weight--item workouts-sets">
+                                                <!--{{Weight.NumberOfSets}}-->   <span class="b-workout-part--instructions--suf" translate="sets"> </span>
+                                            </div>
+                                            <div class="b-workout-part--weight--item workouts-reps">
+                                                <span class="b-workout-part--instructions--suf" translate="reps"> </span>
+                                            </div>
+                                            <div class="b-workout-part--weight--item workouts-rest">
+                                                <!--{{Weight.RestTime}} sec-->  <span class="b-workout-part--instructions--suf" translate="rest"> </span>
+                                            </div>
+                                            <div class="b-workout-part--weight--item workouts-rest">
+                                                <span class="b-workout-part--instructions--suf">weight </span>
+                                            </div>
+                                        </div>
+
+
+                                        <br />
+                                        <div ng-repeat="set in Weight.WeightSets">
+                                            <div class="b-workout-part--instructions weight-set-row">
+
+                                                <div class="b-workout-part--weight--item workouts-sets">
+                                                    {{$index+1}}
+                                                </div>
+                                                <div class="b-workout-part--weight--item workouts-reps">
+                                                    {{set.Repetitions}}
+                                                </div>
+                                                <div class="b-workout-part--weight--item workouts-rest">
+                                                    {{set.RestTime}} sec
+                                                </div>
+                                                <div class="b-workout-part--weight--item workouts-rest">
+                                                    {{set.Weight}} kg
+                                                </div>
+                                            </div>
+                                            <br />
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--end Weight Exercises-->
+                                <!-- circut Exercises -->
+                                <div ng-show="Excercise.CircuitExercises">
+                                    <div ng-repeat="circuit in Excercise.CircuitExercises">
+                                        <div ng-repeat="circuitSet in circuit.CircuitSets">
+
+                                            <div class="b-workout-part--item" ng-show="circuitSet.WeightExercise1">
+                                                <div class="b-workout-part--media pointer-curser">
+                                                    <a class="exercise-thumb exercise-thumb--with-play fancybox-link" fancybox ng-click="openFancybox( circuitSet.WeightExercise1.ItemVideoMale||circuitSet.WeightExercise1.ItemVideoFemale )">
+                                                        <img typeof="foaf:Image" ng-src=" {{circuitSet.WeightExercise1.ImagePath}}" alt="leg press thumbnail" title="Starter&amp;#039;s Guide Leg Press thumbnail">
+                                                    </a>
+
+                                                </div>
+                                                <div class="b-workout-part--description">
+                                                    <h4 class="b-workout-part--exercise-count" translate="Circuit" translate-values="{value: 1}">  </h4>
+                                                    <strong class="b-workout-part--promo-title">{{circuitSet.WeightExercise1.ExcerciseName}}</strong>
+                                                    <span class="b-workout-part--how-to"><a ng-href="{{circuitSet.WeightExercise1.ExerciseLink}}" target="_blank" translate="howTo"> </a></span>
+                                                </div>
+
+                                                <div class="b-workout-part--instructions">
+                                                    <div class="b-workout-part--instructions--item workouts-sets">
+                                                        {{circuit.NumberOfSets}}   <span class="b-workout-part--instructions--suf" translate="sets">sets</span>
+                                                    </div>
+                                                    <div class="b-workout-part--instructions--item workouts-reps">
+                                                        {{circuitSet.WeightExercise1.WeightSets.length}} sets   <span class="b-workout-part--instructions--suf" translate="reps"> </span>
+                                                    </div>
+                                                    <div class="b-workout-part--instructions--item workouts-rest">
+                                                        {{circuit.RestBetweenCircuit}} sec  <span class="b-workout-part--instructions--suf" translate="rest"> </span>
+                                                    </div>
+                                                </div>
+                                                <div class="b-workout-part--editorial-details">
+
+                                                </div>
+                                            </div>
+
+                                            <div class="b-workout-part--item" ng-show="circuitSet.WeightExercise2">
+                                                <div class="b-workout-part--media pointer-curser">
+                                                    <a class="exercise-thumb exercise-thumb--with-play fancybox-link" fancybox ng-click="openFancybox( circuitSet.WeightExercise2.ItemVideoMale||circuitSet.WeightExercise2.ItemVideoFemale )">
+                                                        <img typeof="foaf:Image" ng-src=" {{circuitSet.WeightExercise2.ImagePath}}" alt="leg press thumbnail" title="Starter&amp;#039;s Guide Leg Press thumbnail">
+                                                    </a>
+
+                                                </div>
+                                                <div class="b-workout-part--description">
+                                                    <h4 class="b-workout-part--exercise-count" translate="Circuit" translate-values="{value: 2}">  </h4>
+                                                    <strong class="b-workout-part--promo-title">{{circuitSet.WeightExercise2.ExcerciseName}}</strong>
+                                                    <span class="b-workout-part--how-to"><a ng-href="{{circuitSet.WeightExercise1.ExerciseLink}}" target="_blank" translate="howTo">How to</a></span>
+                                                </div>
+
+                                                <div class="b-workout-part--instructions">
+                                                    <div class="b-workout-part--instructions--item workouts-sets">
+                                                        {{circuit.NumberOfSets}}   <span class="b-workout-part--instructions--suf" translate="sets">sets</span>
+                                                    </div>
+                                                    <div class="b-workout-part--instructions--item workouts-reps">
+                                                        {{circuitSet.WeightExercise2.WeightSets.length}} sets   <span class="b-workout-part--instructions--suf" translate="reps">reps</span>
+                                                    </div>
+                                                    <div class="b-workout-part--instructions--item workouts-rest">
+                                                        {{circuit.RestBetweenCircuit}} sec  <span class="b-workout-part--instructions--suf" translate="rest">rest</span>
+                                                    </div>
+                                                </div>
+                                                <div class="b-workout-part--editorial-details">
+
+                                                </div>
+                                            </div>
+
+                                            <div class="b-workout-part--item" ng-show="circuitSet.WeightExercise3">
+                                                <div class="b-workout-part--media pointer-curser">
+                                                    <a class="exercise-thumb exercise-thumb--with-play fancybox-link" fancybox ng-click="openFancybox( circuitSet.WeightExercise3.ItemVideoMale||circuitSet.WeightExercise3.ItemVideoFemale )">
+                                                        <img typeof="foaf:Image" ng-src=" {{circuitSet.WeightExercise3.ImagePath}}" alt="leg press thumbnail" title="Starter&amp;#039;s Guide Leg Press thumbnail">
+                                                    </a>
+
+                                                </div>
+                                                <div class="b-workout-part--description">
+                                                    <h4 class="b-workout-part--exercise-count" translate="Circuit" translate-values="{value: 3}">  </h4>
+                                                    <strong class="b-workout-part--promo-title">{{circuitSet.WeightExercise3.ExcerciseName}}</strong>
+                                                    <span class="b-workout-part--how-to"><a ng-href="{{circuitSet.WeightExercise3.ExerciseLink}}" target="_blank" translate="howTo">How to</a></span>
+                                                </div>
+
+                                                <div class="b-workout-part--instructions">
+                                                    <div class="b-workout-part--instructions--item workouts-sets">
+                                                        {{circuit.NumberOfSets}}   <span class="b-workout-part--instructions--suf">sets</span>
+                                                    </div>
+                                                    <div class="b-workout-part--instructions--item workouts-reps">
+                                                        {{circuitSet.WeightExercise3.WeightSets.length}} sets   <span class="b-workout-part--instructions--suf">reps</span>
+                                                    </div>
+                                                    <div class="b-workout-part--instructions--item workouts-rest">
+                                                        {{circuit.RestBetweenCircuit}} sec  <span class="b-workout-part--instructions--suf">rest</span>
+                                                    </div>
+                                                </div>
+                                                <div class="b-workout-part--editorial-details">
+
+                                                </div>
+                                            </div>
+
+                                            <div class="b-workout-part--item" ng-show="circuitSet.WeightExercise4">
+                                                <div class="b-workout-part--media pointer-curser">
+                                                    <a class="exercise-thumb exercise-thumb--with-play fancybox-link" fancybox ng-click="openFancybox( circuitSet.WeightExercise4.ItemVideoMale||circuitSet.WeightExercise4.ItemVideoFemale )">
+                                                        <img typeof="foaf:Image" ng-src=" {{circuitSet.WeightExercise4.ImagePath}}" alt="leg press thumbnail" title="Starter&amp;#039;s Guide Leg Press thumbnail">
+                                                    </a>
+
+                                                </div>
+                                                <div class="b-workout-part--description">
+                                                    <h4 class="b-workout-part--exercise-count" translate="Circuit" translate-values="{value: 4}"> </h4>
+                                                    <strong class="b-workout-part--promo-title">{{circuitSet.WeightExercise4.ExcerciseName}}</strong>
+                                                    <span class="b-workout-part--how-to"><a ng-href="{{circuitSet.WeightExercise4.ExerciseLink}}" target="_blank" translate="howTo">How to</a></span>
+                                                </div>
+
+                                                <div class="b-workout-part--instructions">
+                                                    <div class="b-workout-part--instructions--item workouts-sets">
+                                                        {{circuit.NumberOfSets}}   <span class="b-workout-part--instructions--suf">sets</span>
+                                                    </div>
+                                                    <div class="b-workout-part--instructions--item workouts-reps">
+                                                        {{circuitSet.WeightExercise4.WeightSets.length}} sets   <span class="b-workout-part--instructions--suf">reps</span>
+                                                    </div>
+                                                    <div class="b-workout-part--instructions--item workouts-rest">
+                                                        {{circuit.RestBetweenCircuit}} sec  <span class="b-workout-part--instructions--suf">rest</span>
+                                                    </div>
+                                                </div>
+                                                <div class="b-workout-part--editorial-details">
+
+                                                </div>
+                                            </div>
+                                            <div class="b-workout-part--item" ng-show="circuitSet.WeightExercise5">
+                                                <div class="b-workout-part--media pointer-curser">
+                                                    <a class="exercise-thumb exercise-thumb--with-play fancybox-link" fancybox ng-click="openFancybox( circuitSet.WeightExercise5.ItemVideoMale||circuitSet.WeightExercise5.ItemVideoFemale )">
+                                                        <img typeof="foaf:Image" ng-src=" {{circuitSet.WeightExercise5.ImagePath}}" alt="leg press thumbnail" title="Starter&amp;#039;s Guide Leg Press thumbnail">
+                                                    </a>
+
+                                                </div>
+                                                <div class="b-workout-part--description">
+                                                    <h4 class="b-workout-part--exercise-count" translate="Circuit" translate-values="{value: 5}"> </h4>
+                                                    <strong class="b-workout-part--promo-title">{{circuitSet.WeightExercise5.ExcerciseName}}</strong>
+                                                    <span class="b-workout-part--how-to"><a ng-href="{{circuitSet.WeightExercise5.ExerciseLink}}" target="_blank" translate="howTo">How to</a></span>
+                                                </div>
+
+                                                <div class="b-workout-part--instructions">
+                                                    <div class="b-workout-part--instructions--item workouts-sets">
+                                                        {{circuit.NumberOfSets}}   <span class="b-workout-part--instructions--suf">sets</span>
+                                                    </div>
+                                                    <div class="b-workout-part--instructions--item workouts-reps">
+                                                        {{circuitSet.WeightExercise5.WeightSets.length}} sets   <span class="b-workout-part--instructions--suf">reps</span>
+                                                    </div>
+                                                    <div class="b-workout-part--instructions--item workouts-rest">
+                                                        {{circuit.RestBetweenCircuit}} sec  <span class="b-workout-part--instructions--suf">rest</span>
+                                                    </div>
+                                                </div>
+                                                <div class="b-workout-part--editorial-details">
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--end circuit Exercises-->
+                                <!--cardio Exercises-->
+                                <div ng-show="Excercise.CardioExercises">
+                                    <div class="b-workout-part--item" ng-repeat="cardio in Excercise.CardioExercises">
+                                        <div class="b-workout-part--media pointer-curser">
+                                            <a class="exercise-thumb exercise-thumb--with-play fancybox-link" fancybox ng-click="openFancybox( cardio.ItemVideoMale||cardio.ItemVideoFemale )">
+                                                <img typeof="foaf:Image" ng-src=" {{cardio.ImagePath}}" alt="leg press thumbnail" title="Starter&amp;#039;s Guide Leg Press thumbnail">
+                                            </a>
+
+                                        </div>
+                                        <div class="b-workout-part--description">
+                                            <h4 class="b-workout-part--exercise-count" translate="Cardio" translate-values="{value:$index+1}"> </h4>
+                                            <strong class="b-workout-part--promo-title">{{cardio.ExcerciseName}}</strong>
+                                            <span class="b-workout-part--how-to"><a ng-href="{{cardio.ExerciseLink}}" target="_blank" translate="howTo">How to</a></span>
+                                        </div>
+
+                                        <div class="b-workout-part--instructions">
+                                            <div class="b-workout-part--instructions--item workouts-sets">
+                                                {{cardio.EstimatedTime}}   <span class="b-workout-part--instructions--suf">time</span>
+                                            </div>
+                                            <div class="b-workout-part--instructions--item workouts-reps">
+                                                {{cardio.Duration}}     <span class="b-workout-part--instructions--suf">Duration</span>
+                                            </div>
+                                            <div class="b-workout-part--instructions--item workouts-rest">
+                                                {{cardio.RestTime}} sec  <span class="b-workout-part--instructions--suf">rest</span>
+                                            </div>
+                                        </div>
+                                        <div class="b-workout-part--editorial-details">
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--end cardio Exercises-->
+                                <!-- HIT Exercises-->
+                                <div ng-show="Excercise.HiitExercises">
+                                    <div ng-repeat="hit in Excercise.HiitExercises">
+                                        <div class="b-workout-part--item">
+                                            <div class="b-workout-part--media pointer-curser">
+                                                <a class="exercise-thumb exercise-thumb--with-play fancybox-link" fancybox ng-click="openFancybox( hit.WarmupItemVideoMale||hit.WarmupItemVideoFemale )">
+                                                    <img typeof="foaf:Image" ng-src=" {{hit.WarmupImagePath}}" alt="leg press thumbnail" title="Starter&amp;#039;s Guide Leg Press thumbnail">
+                                                </a>
+
+                                            </div>
+                                            <div class="b-workout-part--description">
+                                                <h4 class="b-workout-part--exercise-count" translate="Warmup" translate-values="{value:$index+1}"><!--Warm up    #  {{$index+1}}--></h4>
+                                                <strong class="b-workout-part--promo-title">{{hit.WarmupExcerciseName}}</strong>
+                                                <span class="b-workout-part--how-to"><a ng-href="{{hit.WarmupExerciseLink}} " target="_blank" translate="howTo">How to</a></span>
+                                            </div>
+
+                                            <div class="b-workout-part--instructions">
+                                                <div class="b-workout-part--instructions--item workouts-sets">
+                                                    {{hit.WarmupDuration}}   <span class="b-workout-part--instructions--suf" translate="time">time</span>
+                                                </div>
+                                                <div class="b-workout-part--instructions--item workouts-reps">
+                                                    {{hit.NumberOfRep}}     <span class="b-workout-part--instructions--suf" translate="reps">reps</span>
+                                                </div>
+                                                <div class="b-workout-part--instructions--item workouts-rest">
+                                                    0 sec  <span class="b-workout-part--instructions--suf" translate="rest">rest</span>
+                                                </div>
+                                            </div>
+                                            <div class="b-workout-part--editorial-details">
+
+                                            </div>
+                                        </div>
+                                        <div class="b-workout-part--item">
+                                            <div class="b-workout-part--media pointer-curser">
+                                                <a class="exercise-thumb exercise-thumb--with-play fancybox-link" fancybox ng-click="openFancybox( hit.LowItemVideoMale||hit.LowItemVideoFemale )">
+                                                    <img typeof="foaf:Image" ng-src=" {{hit.LowImagePath}}" alt="leg press thumbnail" title="Starter&amp;#039;s Guide Leg Press thumbnail">
+                                                </a>
+
+                                            </div>
+                                            <div class="b-workout-part--description">
+                                                <h4 class="b-workout-part--exercise-count" translate="Low" translate-values="{value:$index+1}"> {{$index+1}}</h4>
+                                                <strong class="b-workout-part--promo-title">{{hit.LowExcerciseName}}</strong>
+                                                <span class="b-workout-part--how-to"><a ng-href="{{hit.LowExerciseLink}}" target="_blank" translate="howTo">How to</a></span>
+                                            </div>
+
+                                            <div class="b-workout-part--instructions">
+                                                <div class="b-workout-part--instructions--item workouts-sets">
+                                                    {{hit.LowDuration}}   <span class="b-workout-part--instructions--suf" translate="time">time</span>
+                                                </div>
+                                                <div class="b-workout-part--instructions--item workouts-reps">
+                                                    {{hit.NumberOfRep}}     <span class="b-workout-part--instructions--suf" translate="reps">reps</span>
+                                                </div>
+                                                <div class="b-workout-part--instructions--item workouts-rest">
+                                                    0 sec  <span class="b-workout-part--instructions--suf" translate="rest">rest</span>
+                                                </div>
+                                            </div>
+                                            <div class="b-workout-part--editorial-details">
+
+                                            </div>
+                                        </div>
+
+                                        <div class="b-workout-part--item">
+                                            <div class="b-workout-part--media pointer-curser">
+                                                <a class="exercise-thumb exercise-thumb--with-play fancybox-link" fancybox ng-click="openFancybox( hit.HightItemVideoMale||hit.HightItemVideoFemale )">
+                                                    <img typeof="foaf:Image" ng-src=" {{hit.HighImagePath}}" alt="leg press thumbnail" title="Starter&amp;#039;s Guide Leg Press thumbnail">
+                                                </a>
+
+                                            </div>
+                                            <div class="b-workout-part--description">
+                                                <h4 class="b-workout-part--exercise-count" translate="High" translate-values="{value:$index+1}">  </h4>
+                                                <strong class="b-workout-part--promo-title">{{hit.HighExcerciseName}}</strong>
+                                                <span class="b-workout-part--how-to"><a ng-href="{{hit.HightExerciseLink}}" target="_blank" translate="howTo">How to</a></span>
+                                            </div>
+
+                                            <div class="b-workout-part--instructions">
+                                                <div class="b-workout-part--instructions--item workouts-sets">
+                                                    {{hit.HighDuration}}   <span class="b-workout-part--instructions--suf" translate="time">time</span>
+                                                </div>
+                                                <div class="b-workout-part--instructions--item workouts-reps">
+                                                    {{hit.NumberOfRep}}     <span class="b-workout-part--instructions--suf" translate="reps">reps</span>
+                                                </div>
+                                                <div class="b-workout-part--instructions--item workouts-rest">
+                                                    0 sec  <span class="b-workout-part--instructions--suf" translate="rest">rest</span>
+                                                </div>
+                                            </div>
+                                            <div class="b-workout-part--editorial-details">
+
+                                            </div>
+                                        </div>
+
+                                        <div class="b-workout-part--item">
+                                            <div class="b-workout-part--media pointer-curser">
+                                                <a class="exercise-thumb exercise-thumb--with-play fancybox-link" fancybox ng-click="openFancybox( hit.CoolItemVideoMale||hit.CoolItemVideoFemale )">
+                                                    <img typeof="foaf:Image" ng-src=" {{hit.CoolDownImagePath}}" alt="leg press thumbnail" title="Starter&amp;#039;s Guide Leg Press thumbnail">
+                                                </a>
+
+                                            </div>
+                                            <div class="b-workout-part--description">
+                                                <h4 class="b-workout-part--exercise-count" translate="CoolDown" translate-values="{value:$index+1}"><!--Cool down   #  {{$index+1}}--></h4>
+                                                <strong class="b-workout-part--promo-title">{{hit.CoolDownExcerciseName}}</strong>
+                                                <span class="b-workout-part--how-to"><a ng-href="{{hit.CoolDownExerciseLink}}" target="_blank" translate="howTo">How to</a></span>
+                                            </div>
+
+                                            <div class="b-workout-part--instructions">
+                                                <div class="b-workout-part--instructions--item workouts-sets">
+                                                    {{hit.CoolDownDuration}}   <span class="b-workout-part--instructions--suf" translate="time">time</span>
+                                                </div>
+                                                <div class="b-workout-part--instructions--item workouts-reps">
+                                                    {{hit.NumberOfRep}}     <span class="b-workout-part--instructions--suf" translate="reps">reps</span>
+                                                </div>
+                                                <div class="b-workout-part--instructions--item workouts-rest">
+                                                    0 sec  <span class="b-workout-part--instructions--suf" translate="rest">rest</span>
+                                                </div>
+                                            </div>
+                                            <div class="b-workout-part--editorial-details">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--end HIT Exercises-->
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+
+                </div>
+            </div>
+         
+    </div>    </div>

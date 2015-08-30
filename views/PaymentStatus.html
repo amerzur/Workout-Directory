@@ -1,0 +1,60 @@
+﻿ <div ng-controller="paymentStatusController">
+     <div cg-busy="{promise: generatePromise,message:'Loading',backdrop:true  }">
+         <div cg-busy="{promise: statusPromise,message:'Loading',backdrop:true  }">
+
+             <div class="WhiteTitle">
+                 <h3 translate="paymentStatus"> </h3>
+                 <a href="#" ui-sref="Home" class="back-to-list">
+                     <i class="fa fa-arrow-left fa-1x"></i><label translate="back" class="pointer-curser">back</label>
+                 </a>
+             </div>
+             <div class="whiteSlider ">
+                 <div class="alert alert-success fade in" ng-show="paymentStatus.Success">
+                     <button class="close" data-dismiss="alert">
+                         ×
+                     </button>
+
+                     <div ng-show="currentlanguage=='en-US'">
+                         <i class="fa-fw fa fa-check"></i> <strong translate="Success"> </strong><label translate="workoutsAdded"></label>
+
+                     </div>
+                     <div ng-show="currentlanguage=='ar-JO'">
+                         <label translate="workoutsAdded"></label>  <strong translate="Success"> </strong>  <i class="fa-fw fa fa-check"></i>
+
+                     </div>
+                 </div>
+
+                 <div class="alert alert-danger fade in" ng-show="!paymentStatus || !paymentStatus.Success">
+                     <button class="close" data-dismiss="alert">
+                         ×
+                     </button>
+                     <div ng-show="currentlanguage=='en-US'">
+                         <i class="fa-fw fa fa-times"></i>
+                         <strong translate="Error"> </strong> <label translate="transactionNotCompleted"> </label>
+                     </div>
+                     <div ng-show="currentlanguage=='ar-JO'">
+                         <label translate="transactionNotCompleted"> </label><strong translate="Error"> </strong> <i class="fa-fw fa fa-times"></i>
+
+                     </div>
+
+                 </div>
+
+                 <div class="alert alert-info fade in" ng-show="paymentStatus.Success">
+                     <button class="close" data-dismiss="alert">
+                         ×
+                     </button>
+                     <a href="#" ui-sref="purchaseItems">
+                         <div ng-show="currentlanguage=='en-US'">
+                             <i class="fa-fw fa fa-info"></i>
+                             <strong>Click here!</strong> to see your Plan/s.
+                         </div>
+                         <div ng-show="currentlanguage=='ar-JO'">
+
+                             لمشاهدة جدولك \جداولك<strong> اضغط هنا</strong> <i class="fa-fw fa fa-info"></i>
+                         </div>
+
+                     </a>
+                 </div>
+             </div>
+         </div>
+     </div>         </div>

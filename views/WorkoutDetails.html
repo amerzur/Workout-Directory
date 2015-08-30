@@ -1,0 +1,124 @@
+﻿ 
+<div ng-controller="WorkoutDetailsController" ng-init="GetDetails()" class="whiteSlider"> 
+
+    <div cg-busy="{promise:detailsPromise,message:'Loading'}"></div> 
+    <div id="header-photo">
+        <div class="details-photo-header"> 
+            <!--<h1>
+                Workout <span>directory</span>
+            </h1>-->
+            <strong>{{WorkoutDetails.DisplayName}}</strong>
+        </div>
+        <img class="cover-img" ng-src="{{WorkoutDetails.Picture}}" />
+    </div>
+
+    <div id="details">
+        <div class="panel workout-section">
+            <div class="page-container-responsive">
+
+                <div class="row details-border-box">
+                    <div class="col-lg-8">
+
+                        <div class="row-space-4 row-space-top-4">
+                            <div class="row">
+                                <div class="col-md-11">
+
+                                    <h1 class="details-header " id="listing_name">
+                                        <i class="glyphicon glyphicon-signal"></i>   {{WorkoutDetails.DisplayName}}
+                                    </h1>
+
+                                    <hr />
+
+                                    <div class="row row-condensed text-muted text-center">
+                                        <!--<div class="col-sm-3 details-item">
+                                            <img src="/DesktopModules/FYWorkoutDirectory/images/rating.png" />
+                                            <br /> Rating  <br />
+                                            <strong> <rating ng-model="rate" max="5"></rating></strong>
+                                        </div>-->
+                                        <div class="col-sm-4 details-item">
+                                            <img src="/DesktopModules/FYWorkoutDirectory/images/intensity_level.png" />  <!--<i class="fa fa-clock-o fa-5x"></i>-->
+                                            <br /><div translate="intensityLevel">intensity Level</div> <br />   <strong ng-bind="levelString"></strong>
+                                        </div>
+                                        <div class="col-sm-4 details-item">
+                                            <img src="/DesktopModules/FYWorkoutDirectory/images/mian_goal.png" />  <!--<i class="fa fa-caret-square-o-right  fa-5x"></i>-->
+                                            <br /><div translate="mainGoal">Main Goal</div>    <br />
+                                            <strong>{{WorkoutDetails.Objective}}</strong>
+                                        </div>
+                                        <div class="col-sm-4 details-item">
+                                            <img src="/DesktopModules/FYWorkoutDirectory/images/duration.png" />  <!--<i class="fa fa-calendar-o fa-5x"></i>-->
+                                            <br /><div translate="duration">duration</div> <br />
+                                            <strong> {{WorkoutDetails.PlanDurationInWeek}} weeks</strong>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+
+
+
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <a href="#" ng-click="backToList()"  >
+                            <i class="fa fa-arrow-left fa-1x"></i>&nbsp;<label translate="back" class="pointer-curser">back</label>
+                        </a>
+                        <!--<a name="details-price-box"></a>-->
+                        <div class="details-price-box " ng-hide="details.isPurchased">
+                            <h4 class="screen-reader-only details-price">
+                                Price: &nbsp;{{WorkoutDetails.Price}}&nbsp;<i class="fa fa-dollar  "></i>
+                            </h4>
+
+
+                            <div class="panel">
+                                <br />
+                                <div class="col-sm-12 row-space-1-sm">
+                                    <!--<ngcart-addtocart id="{{WorkoutDetails.ProductID}}" name="{{WorkoutDetails.DisplayName}}" price="{{WorkoutDetails.Price}}">  </ngcart-addtocart>-->
+                                    <button class="checkout btn " name="checkout" type="button" ng-click="addToCart(WorkoutDetails)"><span translate="addToCart"></span> </button>
+                                    <button class="checkout btn " name="checkout" type="button" ng-click="checkout()" ><span translate="buy"></span></button>
+                                    <br /> <br />  <label ng-show="showAddedToCart(WorkoutDetails.ProductID)" class="">
+                                        This item is in your cart. <a ng-click=" removeItemById(WorkoutDetails.ProductID)" style="cursor: pointer;">Remove</a>
+                                    </label>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row text-muted details-row ">
+                    <div class="col-sm-2 col-xs-4  " translate="Specification">
+                        Specifecation
+
+                    </div>
+                    <div class="col-sm-4 col-xs-8 ">
+                        Duration by Weeks:<strong> {{WorkoutDetails.PlanDurationInWeek}} weeks</strong>
+                        <br /><br />
+                        Objectives:<strong>{{WorkoutDetails.Objective}}</strong>
+                    </div>
+                    <div class="col-sm-4 col-xs-8 ">
+                        Type: <strong ng-bind="planTypeString"></strong>
+                        <br /><br />
+                        Level:<strong ng-bind="levelString"></strong>
+
+                    </div>
+                </div> 
+
+            </div>
+        </div>
+
+        <div ui-view  >
+
+        </div>
+        <div class="tab-content" id="ContentTab">
+            <div class="tab-pane active" id="reviews">
+                <div class="fb-comments" data-href="{{FacebookUrl}}" data-width="830" data-numposts="15" data-colorscheme="light">
+            </div>
+        </div>
+    </div>
+        </div>
+    </div>

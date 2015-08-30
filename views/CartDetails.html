@@ -1,0 +1,55 @@
+﻿<div ng-controller="CartDetailsController">
+    <div class="whiteSlider  ">
+        <h2 class="page-header font-sm" translate="cartDetails"> Cart Details</h2>
+        <a href="#" ui-sref="Home" class="back-to-list">
+            <i class="fa fa-arrow-left fa-1x"></i><label translate="back" class="pointer-curser">back</label>
+        </a> 
+
+        <!--<iframe id="creditIframe" ng-src="{{paymentUrl}}" ng-model="token" width="600" height="480"></iframe>-->
+
+        <div class="table-responsive col-lg-12">
+            
+            <div class="alert alert-warning fade in" ng-show="cartList.length === 0">
+
+                <i class="fa-fw fa fa-warning"></i>
+               <label translate="emptyCart"></label> 
+            </div>
+            <table class="table table-striped ngCart cart" ng-show="cartList.length != 0">
+
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th translate="name"></th>
+
+                        <th translate="price"> </th>
+
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <!-- ngRepeat: item in ngCart.getCart().items track by $index -->
+                    <tr ng-repeat="item in cartList track by $index" class="ng-scope">
+                        <td><span ng-click="removeFromCart(item.getId())" class="glyphicon glyphicon-remove"></span></td>
+
+                        <td class="ng-binding">{{item.getName()}}</td>
+
+                        <td class="ng-binding">{{item.getPrice() |currency:" USD$"}}</td>
+
+                    </tr><!-- end ngRepeat: item in ngCart.getCart().items track by $index -->
+                </tbody>
+            </table>
+            <div class="btn-group btn-group-lg" role="group" aria-label="...">
+                <!--<ngcart-checkout service="http" settings="{ url:'//DesktopModules/FYWorkoutPlan/API/ExercisePlan/GenerateUserTocken' ,params: { totalAmount:'60',Currency:'sdf'}">
+
+                    <span>Checkout</span>
+                </ngcart-checkout>-->
+                <button type="button" class="btn btn-primary " ng-click="checkout()" ng-disabled="cartList.length==0"><i class="fa fa-shopping-cart"></i>&nbsp;<label translate="checkout"></label>   </button>
+
+                <button type="button" class="btn btn-primary red" ng-click="cleanCart()" ng-show="cartList.length != 0"><span><i class="fa fa-trash"></i> &nbsp;<label translate="clearCart"></label> </span></button>
+                <span class="label label-warning" ng-show="isUndo"><label translate="emptyCart"></label> <a href="#" style="cursor:pointer;" ng-click="UndoClean()"> <label translate="undo" style="cursor:pointer;"></label>  </a> </span>
+            </div>
+
+
+        </div>
+    </div>
+</div>

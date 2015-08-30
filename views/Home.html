@@ -1,0 +1,793 @@
+﻿ <div ng-controller="homeControlller">
+    <!-- BEGIN SIDEBAR -->
+    <div cg-busy="{promise:storePromise,message:'Loading',backdrop:true  }">
+
+        <div class="sidebar col-md-3 col-sm-5 " ng-init="GetFiltersList()">
+            <!--<div cg-busy="myPromise"></div>-->
+            <div class="row margin-bottom-10">
+                <div class="col-md-12  " style="z-index: 999;padding: 10px;">
+
+                    <ul class="list-group margin-bottom-10 sidebar-menu  no-margin">
+
+                        <li class="list-group-item">
+                            <label translate="cartSummary">   </label>
+                            <a href="#" ui-sref="cartDetails">
+                                <div class="input-group">
+
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-shopping-cart "></i>
+
+                                    </span>
+
+
+                                    <ngcart-summary></ngcart-summary> 
+                                    
+                                      
+                                         
+                                </div>
+                            </a>
+                        </li>
+                        <li class="list-group-item" ng-show="clearFitersShow">
+                            
+                             
+                            <button type="button" class="btn btn-primary btn-xs pointer-curser" ng-click="clearFilters()">
+                                <span class="glyphicon glyphicon-trash pointer-curser"></span> <label translate="clearFilters" class="pointer-curser"></label>
+                            </button>
+                        </li>
+                        <li class="list-group-item">
+                            <label translate="searchForWorkout"> </label>
+                            <div class="input-group">
+                                <span class="input-group-addon" ng-click="SearchWorkoutName()">
+                                    <i class="fa fa-search"></i>
+                                </span>
+                                <span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span>
+                                <input type="text" class="form-control ui-autocomplete-input" id="txtexerciseName" ng-model="Criteria.PlanName"
+                                       ng-change="SearchWorkoutName()" autocomplete="off" placeholder="Search for Workout :">
+
+                            </div>
+
+                        </li>
+
+                        <li class="list-group-item">
+                            <!--<slider ng-model="sliders.sliderValue" min="" step="sliderOptions.step" max=""  ></slider>-->
+                            <label> By Week Duration </label>
+                            <div range-slider min="sliderOptions.min" max="sliderOptions.max" model-min="Criteria.minWeek" model-max="Criteria.maxWeek" show-values="true" prevent-equal-min-max="true" on-handle-up="setToFirstPage()"></div>
+                        </li>
+                        <accordion close-others="false">
+
+                            <accordion-group is-open="Collapse.FreeOrPaid">
+                                <accordion-heading>
+                                    <span type="Text" translate="freeOrPaid"> </span><i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down':Collapse.FreeOrPaid,'glyphicon-chevron-right':!Collapse.FreeOrPaid}"></i>
+                                </accordion-heading>
+                                <ul>
+                                    <li class="checkbox" ng-repeat="item in FreeOrPaid">
+                                        <label>
+                                            <input id="{{item.id}}" name="{{item.ItemName}}" value="{{item}}" type="checkbox"
+                                                   ng-checked="FreeOrPaidSelected.indexOf(item) > -1 " style="  height: 15px;" ng-click="toggleFree(item)"><span ng-bind="getFilterText(item)"> </span>
+                                        </label>
+
+                                    </li>
+                                </ul>
+                            </accordion-group>
+                            <!--<li class="list-group-item dropdown clearfix">
+                                <a href="javascript:void(0);" class="">
+                                    <i class="fa fa-angle-right"></i>
+                                    <span id="dnn_ctr1540_View_lblBodyPart" type="Text" translate="freeOrPaid"> </span>
+                                    <i class="fa fa-angle-down"></i>
+                                </a>
+
+                                <ul id="ulBodyPartsFilters" class="dropdown-menu" style="display: none;">
+                                    <div class="checkbox" ng-repeat="item in FreeOrPaid">
+                                        <label>
+                                            <input value="{{item}}" type="checkbox"
+                                                   ng-checked="FreeOrPaidSelected.indexOf(item) > -1 " style="  height: 15px;" ng-click="toggleFree(item)"><span ng-bind="getFilterText(item)"> </span>
+                                        </label>
+
+                                    </div>
+                                </ul>
+                            </li>-->
+                            <accordion-group is-open="Collapse.CompleteOrDay">
+                                <accordion-heading>
+                                    <span type="Text" translate="completePlans"> </span><i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down':Collapse.CompleteOrDay,'glyphicon-chevron-right':!Collapse.CompleteOrDay}"></i>
+                                </accordion-heading>
+                                <ul>
+                                    <li class="checkbox" ng-repeat="item in CompleteOrDay">
+                                        <label>
+                                            <input id="{{item.id}}" name="{{item.ItemName}}" value="{{item}}" type="checkbox"
+                                                   ng-checked="CompleteOrDaySelected.indexOf(item) > -1" style="  height: 15px;" ng-click="toggleCompleteOrDay(item)"><span ng-bind="getFilterText(item)"> </span>
+                                        </label>
+
+                                    </li>
+                                </ul>
+                            </accordion-group>
+
+                            <!--<li class="list-group-item dropdown clearfix">
+                                <a href="javascript:void(0);" class="">
+                                    <i class="fa fa-angle-right"></i>
+                                    <span id="dnn_ctr1540_View_lblBodyPart" type="Text" translate="completePlans"></span>
+                                    <i class="fa fa-angle-down"></i>
+                                </a>
+
+                                <ul id="ulBodyPartsFilters" class="dropdown-menu" style="display: none;">
+                                    <div class="checkbox" ng-repeat="item in CompleteOrDay">
+                                        <label>
+                                            <input value="{{item}}" type="checkbox"
+                                                   ng-checked="CompleteOrDaySelected.indexOf(item) > -1  " style="  height: 15px;" ng-click="toggleCompleteOrDay(item)"><span ng-bind="getFilterText(item)"> </span>
+                                        </label>
+
+                                    </div>
+                                </ul>
+                            </li>-->
+                            <!--<li class="list-group-item dropdown clearfix">
+                                <a href="javascript:void(0);" class="">
+                                    <i class="fa fa-angle-right"></i>
+                                    <span id="dnn_ctr1540_View_lblBodyPart" type="Text" translate="byLevel"> </span>
+                                    <i class="fa fa-angle-down"></i>
+                                </a>
+
+                                <ul id="ulBodyPartsFilters" class="dropdown-menu" style="display: none;">
+                                    <div class="checkbox" ng-repeat="item in levelList">
+                                        <label>
+                                            <input name=" abdominals" value="{{item}}" type="checkbox"
+                                                   ng-checked="LevelSelected.indexOf(item) > -1" ng-click="toggleSelection(item)" style="  height: 15px;">   <span ng-bind="getFilterText(item)"> </span>
+                                        </label>
+
+                                    </div>
+                                </ul>
+                            </li>-->
+                            <accordion-group is-open="Collapse.levelList">
+                                <accordion-heading>
+                                    <span type="Text" translate="byLevel"> </span><i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down':Collapse.levelList,'glyphicon-chevron-right':!Collapse.levelList}"></i>
+                                </accordion-heading>
+                                <ul id="">
+                                    <li class="checkbox" ng-repeat="item in levelList">
+                                        <label>
+                                            <input name=" abdominals" value="{{item}}" type="checkbox"
+                                                   ng-checked="LevelSelected.indexOf(item) > -1" ng-click="toggleSelection(item)" style="  height: 15px;">   <span ng-bind="getFilterText(item)"> </span>
+                                        </label>
+
+                                    </li>
+                                </ul>
+                            </accordion-group>
+                            <accordion-group is-open="Collapse.PlanTypes">
+                                <accordion-heading>
+                                    <span type="Text" translate="byPlanType"> </span><i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down':Collapse.PlanTypes,'glyphicon-chevron-right':!Collapse.PlanTypes}"></i>
+                                </accordion-heading>
+                                <ul>
+                                    <li class="checkbox" ng-repeat="item in PlanTypes">
+                                        <label>
+                                            <input name=" abdominals" value="{{item}}" type="checkbox"
+                                                   ng-checked="PlanTypesSelected.indexOf(item) > -1" style="  height: 15px;" ng-click="toggleSelectedPlanType(item)"><span ng-bind="getFilterText(item)"> </span>
+                                        </label>
+
+                                    </li>
+                                </ul>
+                            </accordion-group>
+
+
+                            <!--<li class="list-group-item dropdown clearfix">
+                                <a href="javascript:void(0);" class="">
+                                    <i class="fa fa-angle-right"></i>
+                                    <span id="dnn_ctr1540_View_lblBodyPart" type="Text" translate="byPlanType"> </span>
+                                    <i class="fa fa-angle-down"></i>
+                                </a>
+
+                                <ul id="ulBodyPartsFilters" class="dropdown-menu" style="display: none;">
+                                    <div class="checkbox" ng-repeat="item in PlanTypes">
+                                        <label>
+                                            <input name=" abdominals" value="{{item}}" type="checkbox"
+                                                   ng-checked="PlanTypesSelected.indexOf(item) > -1" style="  height: 15px;" ng-click="toggleSelectedPlanType(item)"><span ng-bind="getFilterText(item)"> </span>
+                                        </label>
+
+                                    </div>
+                                </ul>
+                            </li>-->
+                            <accordion-group is-open="Collapse.Objectives">
+                                <accordion-heading>
+                                    <span type="Text" translate="objectives"> </span><i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down':Collapse.Objectives,'glyphicon-chevron-right':!Collapse.Objectives}"></i>
+                                </accordion-heading>
+                                <ul>
+                                    <li class="checkbox" ng-repeat="item in Objectives">
+                                        <label>
+                                            <input id="{{item.id}}" name="{{item.ItemName}}" value="{{item}}" type="checkbox"
+                                                   ng-checked="ObjectiveSelected.indexOf(item) > -1" style="  height: 15px;" ng-click="toggleObjective(item)">{{item.ItemName}}
+                                        </label>
+
+                                    </li>
+                                </ul>
+                            </accordion-group>
+                            <!--<li class="list-group-item dropdown clearfix">
+                                <a href="javascript:void(0);" class="">
+                                    <i class="fa fa-angle-right"></i>
+                                    <span id="dnn_ctr1540_View_lblBodyPart" type="Text" translate="objectives">Objectives:</span>
+                                    <i class="fa fa-angle-down"></i>
+                                </a>
+
+                                <ul id="ulBodyPartsFilters" class="dropdown-menu" style="display: none;">
+                                    <div class="checkbox" ng-repeat="item in Objectives">
+                                        <label>
+                                            <input id="{{item.id}}" name="{{item.ItemName}}" value="{{item}}" type="checkbox"
+                                                   ng-checked="ObjectiveSelected.indexOf(item) > -1" style="  height: 15px;" ng-click="toggleObjective(item)">{{item.ItemName}}
+                                        </label>
+
+                                    </div>
+                                </ul>
+                            </li>-->
+
+
+                            <accordion-group is-open="Collapse.BodyParts">
+                                <accordion-heading>
+                                    <span type="Text" translate="bodyParts"> </span><i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down':Collapse.BodyParts,'glyphicon-chevron-right':!Collapse.BodyParts}"></i>
+                                </accordion-heading>
+                                <ul>
+                                    <li class="checkbox" ng-repeat="item in BodyParts">
+                                        <label>
+                                            <input id="{{item.id}}" name="{{item.ItemName}}" value="{{item}}" type="checkbox"
+                                                   ng-checked="BodyPartsSelected.indexOf(item) > -1" style="  height: 15px;" ng-click="toggleBodyPart(item)">{{item.ItemName}}
+                                        </label>
+
+                                    </li>
+                                </ul>
+                            </accordion-group>
+
+                            <!--<li class="list-group-item dropdown clearfix">
+                                <a href="javascript:void(0);" class="">
+                                    <i class="fa fa-angle-right"></i>
+                                    <span id="dnn_ctr1540_View_lblBodyPart" type="Text" translate="bodyParts"> </span>
+                                    <i class="fa fa-angle-down"></i>
+                                </a>
+
+                                <ul id="ulBodyPartsFilters" class="dropdown-menu" style="display: none;">
+                                    <div class="checkbox" ng-repeat="item in BodyParts">
+                                        <label>
+                                            <input id="{{item.id}}" name="{{item.ItemName}}" value="{{item}}" type="checkbox"
+                                                   ng-checked="BodyPartsSelected.indexOf(item) > -1" style="  height: 15px;" ng-click="toggleBodyPart(item)">{{item.ItemName}}
+                                        </label>
+
+                                    </div>
+                                </ul>
+                            </li>-->
+
+                        </accordion>
+
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- END SIDEBAR -->
+        <!-- BEGIN CONTENT -->
+        <div class="col-md-9 col-sm-7 plans-container  ">
+            <div ng-controller="CompletePlansController">
+
+                <div cg-busy="myPromise"></div>
+                <div class="row">
+                    <div class="col-md-12 WhiteTitle" id="store-header">
+                       
+                            <ul class="nav navbar-nav">
+                                <li>
+                                    <a class="store-header-item"> <h3 translate="chooseWorkout"> <span translate="addToCart"></span>- </h3></a>
+                                </li>
+                                <li>
+                                    <a class="store-header-item"> <h3>Total Items:&nbsp;{{TotalItems}}</h3></a>
+                                </li>
+                                 
+                            </ul>
+                           <ul class="nav navbar-nav">
+                               <li data-ng-class="{active: ! listDisplayModeEnabled}" class="toolbaritem pointer-curser">
+                                   <a data-ng-click=" changeDisplayMode( DisplayModeEnum.Card)">
+                                       <span class="glyphicon glyphicon-th-large"></span> &nbsp;<label translate="cardView" class="pointer-curser"></label> <!--Card View-->
+                                   </a>
+                               </li>
+                               <li data-ng-class="{active: listDisplayModeEnabled}" class="toolbaritem pointer-curser">
+                                   <a data-ng-click=" changeDisplayMode( DisplayModeEnum.List)">
+                                       <span class="glyphicon glyphicon-align-justify"></span>&nbsp; <label translate="listView" class="pointer-curser"></label><!--List View-->
+                                   </a>
+                               </li>
+                               <li class="toolbaritem pointer-curser" ng-show="UserID==AdminID" id="addWorkoutBtn">
+                                   <a ng-click="addWorkout()">
+                                       <span class="glyphicon glyphicon-plus"></span><label translate="addWorkout" class="pointer-curser">Add Workout</label>
+                                   </a>
+                               </li>
+                           </ul>
+
+                        </div>
+                   
+
+                </div>
+                <br />
+                <pagination total-items="TotalItems" ng-model="Pagination.CurrentPage" max-size="maxSize" class="pagination-sm store-pagination" boundary-links="true"></pagination>
+                <!-- card view of store items  -->
+                <div class="  " data-ng-show="!listDisplayModeEnabled">
+
+                    <div class="row   show-hide-animation">
+
+                        <div class="col-sm-6  card-animation" ng-repeat="item in Workouts">
+                            <div cg-busy="{promise:addToAccountPromise,message:'Loading',backdrop:true  }">
+                                <div class="store-card-item">
+                                    <div class="cardBody">
+                                        <div class="clearfix">
+                                            <div class="store-card-image">
+                                                <a href="#" ng-click="goDetails(item)" class="white"> <img ng-src="{{item.Picture}}?height=280&width=370&mode=crop&format=jpg&quality=90" /></a>
+                                            </div>
+                                            <div class="store-card-color">
+
+                                                <div ng-show="UserID==AdminID" class="pull-right">
+                                                    <i class="fa fa-pencil-square-o fa-2x pointer-curser " tooltip=" edit item  " ng-click="editStoreItem(item)"></i>&nbsp;
+
+                                                    <i class="fa fa-times fa-2x pointer-curser" ng-click="removeStoreItem(item)" tooltip="remove this item form store "></i>
+                                                </div>
+                                                <div class=" store-card-details">
+                                                    <div class="store-card-header pointer-curser text-center-sm">
+                                                        <h2 ng-click="goDetails(item)">{{item.DisplayName }}</h2>
+                                                    </div>
+
+
+                                                    <ul>
+                                                        <li><span>Plan Type: <strong ng-bind="getPlanTypeString(item.ItemType)">  </strong></span></li>
+                                                        <li><span>Intensity Level: <strong ng-bind="getLevelString(item.ExerciseLevel ||item.UserExerciseLevel)">  </strong></span></li>
+                                                        <li><span> Main Goal: <strong ng-bind="item.ObjectiveName"></strong></span></li>
+                                                        <li ng-show="item.ItemType==2"><span>Duration : <strong>{{item.Duration}}&nbsp;  Weeks</strong></span></li>
+                                                    </ul>
+                                                    <br />
+                                                    <div ng-hide="item.isPurchased">
+
+                                                        <div ng-if="item.Price===0">
+                                                            <div class="details-price pointer-curser" ng-click="addToAccount(item)">
+                                                                <strong>Free</strong>
+                                                            </div>
+                                                        </div>
+                                                        <div ng-if="item.Price!=0">
+                                                            <div class="details-price pointer-curser" ng-click="  addToCart(item)" ng-show="!showAddedToCart(item.ProductID) ">
+                                                                <strong>{{item.Price | currency:"USD$"}}</strong>
+
+
+                                                            </div>
+                                                            <div class="details-price pointer-curser" ng-show="showAddedToCart(item.ProductID)">
+                                                                <strong>
+                                                                    This item is in your cart. <a ng-click=" removeItemById(item.ProductID)" class="pointer-curser"  >Remove</a>
+                                                                </strong>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div ng-show="item.isPurchased">
+                                                        <div class="details-price pointer-curser" ng-click="goPurchaseItems()">
+                                                            <strong>
+                                                                <i class="fa fa-info"></i>  you are allready bought this item
+                                                            </strong>
+                                                        </div>
+                                                    </div>
+                                                    <!--<div ng-show="item.isAdding">
+                                                        <div class="details-price pointer-curser" ng-click="goPurchaseItems()">
+                                                            <strong>
+                                                                <i class="fa fa-info"></i>  Loading ....
+                                                            </strong>
+                                                        </div>
+                                                    </div>-->
+
+
+                                                   
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            </div>
+                    </div>
+
+                </div>
+                <!-- end card view  -->
+                <!-- list view of store -->
+                <div class="  gridContainer customersTable show-hide-animation  " data-ng-show="listDisplayModeEnabled">
+
+                    <div data-ng-repeat="item in Workouts">
+                        <div class="row store-list-item">
+                            <div class="col-sm-6">
+                                <div class="store-list-image pointer-curser" ng-click="goDetails(item)"><img ng-src="{{item.Picture}}?height=396&width=480&mode=crop&format=jpg&quality=90" /></div>
+                            </div>
+
+
+                            <div class="col-sm-6 ">
+                                <div class="store-list-color">
+                                    <div class="pull-right" ng-show="UserID==AdminID">
+                                      <i class="fa fa-pencil-square-o fa-2x pointer-curser " tooltip=" edit item  " ng-click="editStoreItem(item)"></i>&nbsp;
+                                    
+                                      <i class="fa fa-times fa-2x pointer-curser" ng-click="removeStoreItem(item)" tooltip="remove this item form store "></i>
+                                    </div> 
+                                    
+                                    <div class="store-list-header pointer-curser text-center-sm">
+                                        <h2 ng-click="goDetails(item)">{{item.DisplayName }}</h2>
+                                    </div>
+
+
+                                    <ul>
+                                        <li><span>Plan Type: <strong ng-bind="getPlanTypeString(item.ItemType)">  </strong></span></li>
+                                        <li><span>Intensity Level: <strong ng-bind="getLevelString(item.ExerciseLevel ||item.UserExerciseLevel)">  </strong></span></li>
+                                        <li><span> Main Goal: <strong ng-bind="item.ObjectiveName"></strong></span></li>
+                                        <li ng-show="item.ItemType==2"><span>Duration : <strong>{{item.Duration}}&nbsp;  Weeks</strong></span></li>
+                                    </ul>
+
+
+                                    <br />
+                                    <br /><br />
+                                    <div ng-hide="item.isPurchased">
+
+                                        <div ng-if="!showAddedToCart(item.ProductID) &&item.Price===0">
+                                            <div class="details-price pointer-curser" ng-click="addToAccount(item)">
+                                                <strong>Free</strong>
+                                            </div>
+                                        </div>
+                                        <div ng-if="!showAddedToCart(item.ProductID) && item.Price!=0">
+                                            <div class="details-price pointer-curser" ng-click="addToCart(item)">
+                                                <strong>{{item.Price | currency:"USD$"}}</strong>
+                                            </div>
+                                        </div>
+                                        
+                                        <div ng-if=" showAddedToCart(item.ProductID)">
+                                            <div class="details-price pointer-curser">
+                                                <strong>   This item is in your cart. <a ng-click=" removeItemById(item.ProductID)" style="cursor: pointer;">Remove</a></strong>
+                                            </div></div>
+                                    </div>
+                                   
+                                    <div> 
+                                        <div ng-show="item.isPurchased">
+                                            
+                                            <div class="details-price  pointer-curser" ng-click="goPurchaseItems()">
+                                                <strong>you allready added this item</strong>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- end list view  -->
+
+                <div class="container whiteSlider" ng-show="!Workouts.length">
+                    <!--<div class="row show-hide-animation">
+                        <div class="col-span-12">
+                            <h4>No Workouts</strong> found</h4>
+                        </div>
+                    </div>-->
+
+                    <div class="alert alert-warning fade in">
+                        <button class="close" data-dismiss="alert" ng-click="restSearchDefault()">
+                            ×
+                        </button>
+                        <i class="fa-fw fa fa-warning"></i>
+                        <strong translate="noWorkouts"> </strong>&nbsp;<label translate="foundForSearch"></label>
+                    </div>
+                </div>
+                 
+
+                <pagination total-items="TotalItems" ng-model="Pagination.CurrentPage" max-size="maxSize" class="pagination-sm store-pagination" boundary-links="true"></pagination>
+
+                <hr />
+
+
+                <!--  -->
+                <!-- add workout modal  -->
+                <script type="text/ng-template" id="addWorkoutModalContent.html">
+                    <div id="ReApplyPlanDiv" tabindex="-1" role="dialog" aria-hidden="true">
+
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" ng-click="cancel()" aria-hidden="true">&times;</button>
+                                <h4 class="modal-title">Add Workout </h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="row-fluid"></div>
+
+                                        <div class="span12">
+
+
+                                            <form name="addForm" novalidate>
+                                                 <div class="row">
+
+                                                    <div class="col-md-12">
+
+
+                                                        <label class="control-label col-md-4" for="DName">
+                                                            DisplayName <span class="require"> * </span>
+
+                                                        </label>
+                                                        <div class="col-md-8">
+                                                            <input type="text" placeholder=' name ' class="form-control input-medium" name="DName" ng-model="selectedItem.DisplayName" ng-model-options="{ updateOn: 'blur' }" required>
+
+                                                            <div ng-show="addForm.$submitted || addForm.DName.$touched">
+                                                                <code ng-show="addForm.DName.$error.required ">Dispaly Name is required.</code>
+                                                            </div>
+                                                        </div>
+
+
+                                                        <label class="control-label col-md-4" for="Price">
+                                                            Price <span class="require"> * </span>
+
+                                                        </label>
+                                                        <div class="col-md-8">
+                                                            <input type="number" min="0" placeholder='price' class="form-control input-medium" name="Price" ng-model="selectedItem.Price" required>
+
+                                                            <div ng-show="addForm.$submitted || addForm.Price.$touched">
+                                                                <code ng-show="addForm.Price.$error.required ">price is required.</code>
+                                                                <code ng-show="addForm.Price.$error.number">price is number.</code>
+                                                            </div>
+                                                        </div>
+
+
+
+                                                        <!--<label class="control-label col-md-4">
+                                                            ProductImage
+
+                                                        </label>
+                                                        <div class="col-md-8">
+                                                            <input type="text" placeholder=' ProductImage ' class="form-control input-medium" name="ProductImage" ng-model="selectedItem.Picture">
+                                                            <span class="help-block" id="Validate1"></span>
+
+
+                                                        </div>-->
+
+
+
+                                                        <label class="control-label col-md-4">
+                                                            ProductVideo
+
+                                                        </label>
+                                                        <div class="col-md-8">
+                                                            <input type="text" placeholder=' ProductVideo ' class="form-control input-medium" name="ProductVideo" ng-model="selectedItem.Video">
+                                                            <span class="help-block" id="Validate2"></span>
+
+
+                                                        </div>
+                                                        <div ng-hide="hasImage   ">
+                                                            <!-- file uploader starts  -->
+
+                                                            <label class="control-label col-md-4">Product Image</label>
+                                                            <div ng-show="uploader.isHTML5">
+                                                                <!-- 3. nv-file-over uploader="link" over-class="className" -->
+                                                                <!--<div class="well my-drop-zone" nv-file-over="" uploader="uploader">
+                        Base drop zone
+                    </div>-->
+                                                                <!--<div nv-file-drop="" uploader="uploader" options="{ url: '/foo' }">
+                                                                    <div nv-file-over="" uploader="uploader" over-class="another-file-over-class" class="well my-drop-zone">
+                                                                        Another drop zone with its own settings
+                                                                    </div>
+            </div>-->
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <input type="file" nv-file-select="" uploader="uploader" name="File" required /><br />
+                                                                <div ng-show="addForm.$submitted || addForm.File.$touched">
+                                                                    <code ng-show="addForm.File.$error.required ">image required !</code>
+                                                                </div>
+                                                            </div>
+                                                            <table class="table">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th width="50%">Name</th>
+                                                                        <th ng-show="uploader.isHTML5">Size</th>
+                                                                        <th ng-show="uploader.isHTML5">Progress</th>
+                                                                        <th>Status</th>
+                                                                        <!--<th>Actions</th>-->
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr ng-repeat="item in uploader.queue">
+                                                                        <td>
+                                                                            <strong>{{ item.file.name }}</strong>
+                                                                            <!-- Image preview -->
+                                                                            <!--auto height-->
+                                                                            <!--<div ng-thumb="{ file: item.file, width: 100 }"></div>-->
+                                                                            <!--auto width-->
+                                                                            <div ng-show="uploader.isHTML5" ng-thumb="{ file: item._file, height: 100 }"></div>
+                                                                            <!--fixed width and height -->
+                                                                            <!--<div ng-thumb="{ file: item.file, width: 100, height: 100 }"></div>-->
+                                                                        </td>
+                                                                        <td ng-show="uploader.isHTML5" nowrap>{{ item.file.size/1024/1024|number:2 }} MB</td>
+                                                                        <td ng-show="uploader.isHTML5">
+                                                                            <div class="progress" style="margin-bottom: 0;">
+                                                                                <div class="progress-bar" role="progressbar" ng-style="{ 'width': item.progress + '%' }"></div>
+                                                                            </div>
+                                                                        </td>
+                                                                        <td class="text-center">
+                                                                            <span ng-show="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>
+                                                                            <span ng-show="item.isUploading"><i class="glyphicon glyphicon-ban-circle"></i></span>
+                                                                            <span ng-show="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
+                                                                        </td>
+                                                                        <!--<td nowrap>
+                                                                        <button type="button" class="btn btn-success btn-xs" ng-click="item.upload()" ng-disabled="item.isReady || item.isUploading || item.isSuccess">
+                                                                            <span class="glyphicon glyphicon-upload"></span> Upload
+                                                                        </button>
+                                                                        <button type="button" class="btn btn-warning btn-xs" ng-click="item.cancel()" ng-disabled="!item.isUploading">
+                                                                            <span class="glyphicon glyphicon-ban-circle"></span> Cancel
+                                                                        </button>
+                                                                        <button type="button" class="btn btn-danger btn-xs" ng-click="item.remove()">
+                                                                            <span class="glyphicon glyphicon-trash"></span> Remove
+                                                                        </button>
+                                                                    </td>-->
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+
+
+                                                            <div>
+                                                                <div>
+                                                                    Queue progress:
+                                                                    <span class="alert alert-warning" ng-show="addForm.$invalid  "><span class="glyphicon glyphicon-ban-circle"></span> you must complete the requierd fileds before upload the image </span>
+                                                                    <div class="progress" style="">
+                                                                        <div class="progress-bar" role="progressbar" ng-style="{ 'width': uploader.progress + '%' }"></div>
+                                                                    </div>
+                                                                </div>
+                                                                <button type="button" class="btn btn-success btn-s" ng-click="uploader.uploadAll()" ng-disabled="!uploader.getNotUploadedItems().length ||addForm.$invalid ">
+                                                                    <span class="glyphicon glyphicon-upload"></span> Upload all
+                                                                </button>
+                                                                <button type="button" class="btn btn-warning btn-s" ng-click="uploader.cancelAll()" ng-disabled="!uploader.isUploading">
+                                                                    <span class="glyphicon glyphicon-ban-circle"></span> Cancel all
+                                                                </button>
+                                                                <button type="button" class="btn btn-danger btn-s" ng-click="uploader.clearQueue()" ng-disabled="!uploader.queue.length">
+                                                                    <span class="glyphicon glyphicon-trash"></span> Remove all
+                                                                </button>
+                                                            </div>
+
+
+                                                            <!-- file uploader ends  -->
+
+                                                        </div>
+                                                        
+                                                        <div ng-show="hasImage" class="plan-modal-excist-image">
+                                                            <table class="table">
+
+                                                                <tr>
+                                                                    <td><img ng-src="{{selectedItem.Picture}}" /></td>
+                                                                    <td>
+                                                                        <button type="button" class="btn btn-danger btn-xs" ng-click="switchImage()">
+                                                                            <span class="glyphicon glyphicon-trash"></span> Remove
+                                                                        </button>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                           
+                                                            
+                                                            
+                                                        </div>
+                                                        
+                                                         <div>
+
+                                                            <hr />
+
+                                                            <div class="col-md-6">
+                                                                <h2>
+                                                                    Os Type
+                                                                </h2>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <h2>
+                                                                    InAppId
+                                                                </h2>
+                                                            </div> 
+                                                            <div class="col-md-6">
+                                                                <span> Android </span>
+
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <input type="text" class="form-control input-medium" name="InAppID" ng-model="selectedItem.Android">
+                                                            </div>
+
+
+
+
+
+                                                            <div class="col-md-6">
+                                                                <span> IOS </span>
+
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <input type="text" class="form-control input-medium" name="InAppID" ng-model="selectedItem.IOS">
+                                                            </div>
+
+
+
+
+                                                            <div class="col-md-6">
+                                                                <span> Windows Phone </span>
+
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <input type="text" class="form-control input-medium" name="InAppID" ng-model="selectedItem.WindowsPhone">
+                                                            </div>
+
+
+
+                                                            <hr />
+
+                                                            <div class="row">
+                                                                <div class="col-sm-10">
+                                                                    <div class="input-group-btn" data-toggle="buttons">
+
+                                                                        <div data-toggle="buttons" class="input-group-btn">
+                                                                            <label class="btn btn-primary" ng-class="{active:itemType==1}" ng-click="itemType=1">
+                                                                                <input type="radio" class="toggle">
+                                                                                Workout
+                                                                            </label>
+                                                                            <label class="btn btn-primary" ng-class="{active:itemType==2}" ng-click="itemType=2">
+                                                                                <input type="radio" class="toggle">
+                                                                                WorkoutPlan
+                                                                            </label>
+
+                                                                        </div>
+                                                                    </div>
+                                                                    <div>
+                                                                        <div class="alert alert-info fade in col-sm-12" ng-show="selectedItem.FK_ItemId">
+                                                                            <button class="close" ng-click="removeSelected()">
+                                                                                ×
+                                                                            </button>
+                                                                            <i class="fa-fw fa fa-info"></i>
+                                                                            <div ng-show="selectedFromList">
+                                                                                <strong>selected Item:</strong> {{selectedFromList.name}} / &nbsp;{{selectedFromList.CreatedOnDate |date}} / &nbsp; {{selectedFromList.Username}} .
+                                                                            </div> 
+                                                                        </div>
+
+                                                                        <div ng-show="addForm.$submitted  ">
+                                                                            <code ng-show="addForm.FK.$error.required ">you must select item below.</code>
+                                                                        </div>
+
+                                                                        <input type="hidden" ng-model="selectedItem.FK_ItemId" name="FK" required />
+                                                                        <div class="panel panel-custom" id="NutritionPlanWizard">
+                                                                            <div class="panel-heading">
+                                                                                <h3 class="panel-title"> Workout Name /Creation Date / User Name </h3>
+                                                                            </div>
+                                                                            <div class="panel-body" style="max-height: 150px;overflow-y: scroll;">
+                                                                                <ul ng-show="itemType==2">
+                                                                                    <li ng-repeat="item in usersPlansList">
+                                                                                        <a ng-click="setSelectedItem(item)" style="cursor:pointer;"> <span class="col-sm-4">{{item.Name}}</span><span class="col-sm-4">{{item.CreatedOnDate |date}}</span><span class="col-sm-4"> &nbsp; {{item.Username |limitTo:numLimit}}</span> </a>
+                                                                                    </li>
+
+                                                                                </ul>
+                                                                                <ul ng-show="itemType==1">
+                                                                                    <li ng-repeat="item in usersWorkoutsList">
+                                                                                        <a ng-click="setSelectedItem(item)" style="cursor:pointer;"> <span class="col-sm-4">{{item.WorkoutName}}</span><span class="col-sm-4">{{item.CreatedOnDate |date}}</span><span class="col-sm-4"> {{item.Username|limitTo:numLimit}}</span> </a>
+                                                                                    </li>
+                                                                                </ul>
+                                                                            </div>
+                                                                        </div>
+                                                                        <pagination total-items="totalItems" ng-model="Pagination.CurrentPage" direction-links="true" max-size="maxSize" class="pagination-sm" previous-text="&laquo; " next-text="&raquo; "></pagination>
+                                                                        <div class="input-group-btn" data-toggle="buttons">
+                                                                            <button type="submit" ng-disabled=" addForm.$invalid "
+                                                                                    class="btn btn-primary" ng-click="save()">
+                                                                                save
+                                                                            </button>
+                                                                            <button type="button" class="btn btn-default" ng-click="cancel()">Cancel</button>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                            </form>
+
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </script>
+
+                <!-- end add workout modal  -->
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- END CONTENT -->
