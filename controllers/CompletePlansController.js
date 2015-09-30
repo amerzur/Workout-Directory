@@ -52,14 +52,25 @@
     }
      $scope.getPlanTypeString = function (plantype) {
          if (plantype)
-             return $rootScope.CompleteOrDay[plantype - 1].text;
+         {
+             if ($scope.language == 'en-US')
+                 return $rootScope.CompleteOrDay[plantype - 1].text;
+             else
+                 return $rootScope.CompleteOrDay[plantype - 1].textAR;
+
+         }
+             
          else
              return "";
      }
      $scope.getLevelString = function (levelNum) {
          
-         if (levelNum)
-             return $rootScope.Level[levelNum - 1].text;
+         if (levelNum){
+             if($scope.language=='en-US')
+                 return $rootScope.Level[levelNum - 1].text;
+             else
+                 return $rootScope.Level[levelNum - 1].textAR; 
+         }
          else
              return "";
 

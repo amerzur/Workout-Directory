@@ -21,32 +21,29 @@
                      <div class="purchased-card-item">
                          <div class="cardBody">
                              <div class="clearfix">
-                                 <div class="store-card-image">
-                                     <a href="#" ng-click="goDetails(item)" class="white"> <img ng-src="{{item.Picture}}" /></a>
+                                 <div class=" ">
+                                     <a href="#" ng-click="goDetails(item)" class="white"> <img ng-src="{{item.Picture}}?height=280&width=370&mode=crop&format=jpg&quality=90" /></a>
                                  </div>
                                  <div class="purchased-card-color">
-                                     <!--<a href="#" ng-click="goDetails(item)" class="store-list-header"> {{item.DisplayName }}</a>-->
-                                     <div class=" store-card-details">
-                                         <div class="store-card-header pointer-curser text-center-sm">
-                                             <h2 ng-click="goDetails(item)">{{item.DisplayName }}</h2>
+                                     <div class="row">
+                                        
+                                             <div class="  pointer-curser text-center-sm">
+                                                 <h2 ng-click="goDetails(item)">{{item.DisplayName }}</h2>
+                                             </div> 
+                                             <div class="row"> 
+                                                 <div class="details-price pointer-curser col-sm-8  col-sm-offset-2" ng-click="openModal(item)">
+                                                     <strong>
+                                                         <i class="fa fa-info"></i>  <label translate="clickToReset"></label>
+                                                     </strong>
+                                                 </div>
+                                              
+
+
+
+
+
                                          </div>
-
-
-                                          
-
-
-                                         <div class="details-price pointer-curser" ng-click="openModal(item)">
-                                             <strong>
-                                                 <i class="fa fa-info"></i>  <label translate="clickToReset"></label>
-                                             </strong>
-                                         </div>
-
-
-
-                                          
-
-                                     </div>
-                                 </div>
+                                     </div> </div>
                              </div>
                          </div>
 

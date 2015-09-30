@@ -7,7 +7,7 @@ function ($scope, $rootScope, $state, $stateParams, WorkoutDetailsREST, OneDayWo
 
 
     /// change the window title 
-    $window.document.title = "FitnessYard.com  Workout Details";
+    $window.document.title = "Fitnessyard Workout Details";
 
     $scope.WeekList = [];
     $scope.rate = 4;
@@ -16,77 +16,151 @@ function ($scope, $rootScope, $state, $stateParams, WorkoutDetailsREST, OneDayWo
     $scope.details = {};
     $scope.getLevelString = function (levelNum) {
         if (levelNum)
-            return $rootScope.Level[levelNum - 1].text;
+        {
+            if ($scope.getCurrentCulture() == 'en-US')
+                return $rootScope.Level[levelNum - 1].text;
+            else
+                return $rootScope.Level[levelNum - 1].textAR;
+        }
         else
             return "";
 
     }
     $scope.getPlanTypeString = function (plantype) {
         if (plantype)
-            return $rootScope.CompleteOrDay[plantype - 1].text;
+        {
+            if ($scope.getCurrentCulture() == 'en-US')
+                return $rootScope.CompleteOrDay[plantype - 1].text;
+            else
+                return $rootScope.CompleteOrDay[plantype - 1].textAR;
+
+        }
+
         else
             return "";
     }
-
+    $scope.getCurrentCulture = function () {
+        return $rootScope.currentLanguage();
+    }
     $scope.getNumberWeek = function (num) {
 
         return new Array(num);
     }
     $scope.FacebookUrl = $rootScope.FacebookUrl();
     $scope.getWeekText = function (index) {
-        switch (index)
+        if ($scope.getCurrentCulture()=='en-US')
         {
-            case 1:
-                return "WEEK ONE";
-                break;
-            case 2:
-                return "WEEK TWO";
-                break;
-            case 3:
-                return "WEEK THREE";
-                break;
-            case 4:
-                return "WEEK FOUR";
-                break;
-            case 5:
-                return "WEEK FIVE";
-                break;
-            case 6:
-                return "WEEK SIX";
-                break;
-            case 7:
-                return "WEEK SEVEN";
-                break;
-            case 8:
-                return "WEEK EIGHT";
-                break;
-            case 9:
-                return "WEEK NINE";
-                break;
-            case 10:
-                return "WEEK TEN";
-                break;
-            case 11:
-                return "WEEK ELEVEN";
-            case 12:
-                return "WEEK TWELVE";
-            case 13:
-                return "WEEK THIRTEEN ";
-            case 14:
-                return "WEEK FOURTEEN";
-            case 15:
-                return "WEEK FIFTEEN";
-            case 16:
-                return "WEEK SIXTEEN";
-            case 17:
-                return "WEEK SEVENTEEN";
-            case 18:
-                return "WEEK EIGHTTEEN";
-            case 19:
-                return "WEEK NINETEEN";
-                break;
+            switch (index)
+            {
+                case 1:
+                    return "WEEK ONE";
+                    break;
+                case 2:
+                    return "WEEK TWO";
+                    break;
+                case 3:
+                    return "WEEK THREE";
+                    break;
+                case 4:
+                    return "WEEK FOUR";
+                    break;
+                case 5:
+                    return "WEEK FIVE";
+                    break;
+                case 6:
+                    return "WEEK SIX";
+                    break;
+                case 7:
+                    return "WEEK SEVEN";
+                    break;
+                case 8:
+                    return "WEEK EIGHT";
+                    break;
+                case 9:
+                    return "WEEK NINE";
+                    break;
+                case 10:
+                    return "WEEK TEN";
+                    break;
+                case 11:
+                    return "WEEK ELEVEN";
+                case 12:
+                    return "WEEK TWELVE";
+                case 13:
+                    return "WEEK THIRTEEN ";
+                case 14:
+                    return "WEEK FOURTEEN";
+                case 15:
+                    return "WEEK FIFTEEN";
+                case 16:
+                    return "WEEK SIXTEEN";
+                case 17:
+                    return "WEEK SEVENTEEN";
+                case 18:
+                    return "WEEK EIGHTTEEN";
+                case 19:
+                    return "WEEK NINETEEN";
+                    break;
 
+            }
+        } else
+        {
+            switch (index)
+            {
+                case 1:
+                    return "الاسبوع الاول";
+                    break;
+                case 2:
+                    return "الاسبوع الثاني";
+                    break;
+                case 3:
+                    return "الاسبوع الثالث";
+                    break;
+                case 4:
+                    return "الاسبوع الرابع";
+                    break;
+                case 5:
+                    return "الاسبوع الخامس";
+                    break;
+                case 6:
+                    return "الاسبوع السادس";
+                    break;
+                case 7:
+                    return "الاسبوع السابع";
+                    break;
+                case 8:
+                    return "الاسبوع الثامن";
+                    break;
+                case 9:
+                    return "الاسبوع التاسع";
+                    break;
+                case 10:
+                    return "الاسبوع العاشر";
+                    break;
+                case 11:
+                    return "الاسبوع الحادي عشر";
+                case 12:
+                    return "الاسبوع الثاني عشر";
+                case 13:
+                    return "الاسبوع الثالث عشر ";
+                case 14:
+                    return "الاسبوع الرابع عشر";
+                case 15:
+                    return "الاسبوع الخامس عشر";
+                case 16:
+                    return "الاسبوع السادس عشر";
+                case 17:
+                    return "الاسبوع السابع عشر";
+                case 18:
+                    return "الاسبوع الثامن عشر";
+                case 19:
+                    return "الاسبوع التاسع عشر";
+                    break;
+
+            }
         }
+
+        
     }
 
     $scope.ID = $stateParams.workoutID;

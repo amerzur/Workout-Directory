@@ -17,16 +17,16 @@
             <div class="page-container-responsive">
 
                 <div class="row details-border-box">
-                    <div class="col-lg-8">
+                    <div class="col-sm-8">
 
-                        <div class="row-space-4 row-space-top-4">
+                        
                             <div class="row">
-                                <div class="col-md-11">
+                                <div class="col-md-12">
 
                                     <h1 class="details-header " id="listing_name">
                                         <i class="glyphicon glyphicon-signal"></i>   {{WorkoutDetails.DisplayName}}
                                     </h1>
-
+                                    <span ng-bind="WorkoutDetails.Description" class="col-sm-offset-1" style="    display: inline-block;"></span>
                                     <hr />
 
                                     <div class="row row-condensed text-muted text-center">
@@ -35,9 +35,9 @@
                                             <br /> Rating  <br />
                                             <strong> <rating ng-model="rate" max="5"></rating></strong>
                                         </div>-->
-                                        <div class="col-sm-4 details-item">
+                                        <div class="col-sm-3 col-sm-offset-1 details-item">
                                             <img src="/DesktopModules/FYWorkoutDirectory/images/intensity_level.png" />  <!--<i class="fa fa-clock-o fa-5x"></i>-->
-                                            <br /><div translate="intensityLevel">intensity Level</div> <br />   <strong ng-bind="levelString"></strong>
+                                            <br /><div translate="intensityLevel">  intensity Level</div> <br />   <strong ng-bind="levelString"></strong>
                                         </div>
                                         <div class="col-sm-4 details-item">
                                             <img src="/DesktopModules/FYWorkoutDirectory/images/mian_goal.png" />  <!--<i class="fa fa-caret-square-o-right  fa-5x"></i>-->
@@ -47,7 +47,7 @@
                                         <div class="col-sm-4 details-item">
                                             <img src="/DesktopModules/FYWorkoutDirectory/images/duration.png" />  <!--<i class="fa fa-calendar-o fa-5x"></i>-->
                                             <br /><div translate="duration">duration</div> <br />
-                                            <strong> {{WorkoutDetails.PlanDurationInWeek}} weeks</strong>
+                                            <strong> {{WorkoutDetails.PlanDurationInWeek}} <span translate="weeks"></span>  </strong>
 
                                         </div>
                                     </div>
@@ -59,29 +59,35 @@
 
 
 
-
-                        </div>
+ 
                     </div>
-                    <div class="col-lg-4">
-                        <a href="#" ng-click="backToList()"  >
-                            <i class="fa fa-arrow-left fa-1x"></i>&nbsp;<label translate="back" class="pointer-curser">back</label>
-                        </a>
+                    <div class="col-sm-4">
+                        <div class="row">
+                            <a href="#" ng-click="backToList()" class="col-sm-5 col-sm-offset-1">
+                                <i class="fa fa-arrow-left fa-1x"></i>&nbsp;<span translate="back" class="pointer-curser">back</span>
+                            </a>
+                        </div>
                         <!--<a name="details-price-box"></a>-->
                         <div class="details-price-box " ng-hide="details.isPurchased">
                             <h4 class="screen-reader-only details-price">
-                                Price: &nbsp;{{WorkoutDetails.Price}}&nbsp;<i class="fa fa-dollar  "></i>
+                             <span translate="price"></span> : &nbsp;{{WorkoutDetails.Price}}&nbsp;<i class="fa fa-dollar  "></i>
                             </h4>
 
 
-                            <div class="panel">
+                            <div class="panel row">
                                 <br />
-                                <div class="col-sm-12 row-space-1-sm">
+                                <div class="col-sm-12 ">
                                     <!--<ngcart-addtocart id="{{WorkoutDetails.ProductID}}" name="{{WorkoutDetails.DisplayName}}" price="{{WorkoutDetails.Price}}">  </ngcart-addtocart>-->
-                                    <button class="checkout btn " name="checkout" type="button" ng-click="addToCart(WorkoutDetails)"><span translate="addToCart"></span> </button>
-                                    <button class="checkout btn " name="checkout" type="button" ng-click="checkout()" ><span translate="buy"></span></button>
-                                    <br /> <br />  <label ng-show="showAddedToCart(WorkoutDetails.ProductID)" class="">
-                                        This item is in your cart. <a ng-click=" removeItemById(WorkoutDetails.ProductID)" style="cursor: pointer;">Remove</a>
-                                    </label>
+                                    <button class="checkout btn col-sm-5 col-sm-offset-1 " name="checkout" type="button" ng-click="addToCart(WorkoutDetails)"><span translate="addToCart"></span> </button>
+                                    <button class="checkout btn col-sm-2 col-sm-offset-1 " name="checkout" type="button" ng-click="checkout()" style=" width: 34%; ">
+                                        <span translate="buy"></span>
+                                    </button>
+                                    <br /> <br /> 
+                                    <div class="row">
+                                        <label ng-show="showAddedToCart(WorkoutDetails.ProductID)" class=" col-sm-offset-2">
+                                            <span translate="itemInCart"></span>  <a ng-click=" removeItemById(WorkoutDetails.ProductID)" style="cursor: pointer;"><span translate="remove"></span> </a>
+                                        </label>
+                                    </div>
                                 </div>
 
                             </div>
@@ -90,20 +96,22 @@
                         </div>
                     </div>
                 </div>
-                <div class="row text-muted details-row ">
-                    <div class="col-sm-2 col-xs-4  " translate="Specification">
-                        Specifecation
+                <br />
+                <div class="row text-muted   ">
+                    <div class="col-sm-2 col-xs-4 col-sm-offset-1  " translate="Specification">
+                        <span translate="Specification"></span>
 
                     </div>
                     <div class="col-sm-4 col-xs-8 ">
-                        Duration by Weeks:<strong> {{WorkoutDetails.PlanDurationInWeek}} weeks</strong>
+                        <span translate="duration"></span>:<strong> {{WorkoutDetails.PlanDurationInWeek}} <span translate="weeks"></span></strong>
                         <br /><br />
-                        Objectives:<strong>{{WorkoutDetails.Objective}}</strong>
+                        <span translate="objectives"></span>:<strong>{{WorkoutDetails.Objective}}</strong>
                     </div>
                     <div class="col-sm-4 col-xs-8 ">
-                        Type: <strong ng-bind="planTypeString"></strong>
+                        <span translate="planType"></span> : <strong ng-bind="planTypeString"></strong>
                         <br /><br />
-                        Level:<strong ng-bind="levelString"></strong>
+                        <span translate="intensityLevel"></span>
+                               :<strong ng-bind="levelString"></strong>
 
                     </div>
                 </div> 
@@ -114,7 +122,7 @@
         <div ui-view  >
 
         </div>
-        <div class="tab-content" id="ContentTab">
+        <div class="col-sm-offset-1" id="ContentTab">
             <div class="tab-pane active" id="reviews">
                 <div class="fb-comments" data-href="{{FacebookUrl}}" data-width="830" data-numposts="15" data-colorscheme="light">
             </div>

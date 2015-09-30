@@ -68,9 +68,10 @@ WDApp.config(function ($stateProvider, $urlRouterProvider, $translateProvider, $
         home: "Home",
         back:"BACK TO LIST",
         cartSummary: "Cart summary",
-        searchForWorkout: "Search for Workout :",
+        searchForWorkout: "Search for Workout",
         byLevel: "By Level",
         byPlanType: "By Plan Type",
+        planType:"Plan Type ",
         objectives: "objectives",
         freeOrPaid: "free Or Paid",
         completePlans: "full Plans or day Workouts",
@@ -87,6 +88,7 @@ WDApp.config(function ($stateProvider, $urlRouterProvider, $translateProvider, $
         noWorkouts: "No Workouts",
         foundForSearch: "Found For your search ",
         week: "Week",
+        weeks:"Week(s)",
         numberDaysWeek: "Number Of Days Per Week:",
         numberWorkoutDay: "Number Of Workouts Per Day:",
         numberWeek: "Number Of  Weeks:",
@@ -104,6 +106,7 @@ WDApp.config(function ($stateProvider, $urlRouterProvider, $translateProvider, $
         High: "High {{value}}",
         CoolDown: "Cool Down {{value}}",
         Weight: "Weight Exercise  {{value}}",
+        weight:"Weight",
         Exercise: "Exercise",
         time: "time",
         cartDetails: "Cart Details",
@@ -113,7 +116,7 @@ WDApp.config(function ($stateProvider, $urlRouterProvider, $translateProvider, $
         clearCart: "Clear Cart?",
         emptyCart: "now all the cart are empty ",
         undo: "Undo ?",
-        paymentStatus: "Payment status page",
+        paymentStatusPage: "Payment status page",
         Success: "Success ",
         workoutsAdded: "your workouts have been added , an Email sent to your Account.",
         Error: "Error! ",
@@ -125,10 +128,25 @@ WDApp.config(function ($stateProvider, $urlRouterProvider, $translateProvider, $
         youBoughtItem: "you are allready bought this item"
         , clearFilters: "Clear Search Fiters ?"
         , PaymentTerms: "Our General Terms and Conditions are applied, which you can find at fitnessyard.com website. Your subscription will be automatically renewed. Any membership fees will be automatically charged from your credit card or through your bank account. You can cancel your subscription at any time by visiting billing information page or send us an e-mail tosupport@fitnessyard.com. Your membership will then automatically end after the contract period, so you will never be charged again."
-, intensityLevel: "Intensity Level",
-mainGoal: "Main Goal",
-duration: "Duration",
-Specification: "Specification"
+        , intensityLevel: "Intensity Level",
+        mainGoal: "Main Goal",
+        duration: "Duration",
+        Specification: "Specification",
+        free: "Free",
+        totalItems: "Total Items",
+        itemInCart: "This item is in your cart.",
+        remove: "Remove",
+        kg: "kg",
+        sec: "sec",
+        byWeekDuraion: "By Week Duration",
+        items: "Items",
+        item: "Item",
+        previous: "Previous",
+        next: "Next",
+        lastPage: "Last",
+        firstPage:"First"
+
+
     });
     $translateProvider.translations("ar-JO", {
         home: "الرئيسية",
@@ -137,6 +155,7 @@ Specification: "Specification"
         searchForWorkout: "ابحث عن تمرين",
         byLevel: " المستوى",
         byPlanType: "نوع الخطة",
+        planType:"نوع التمرين",
         objectives: "الاهداف",
         freeOrPaid: "مجانا او للبيع",
         completePlans: "خطة كاملة او ليوم واحد",
@@ -153,6 +172,7 @@ Specification: "Specification"
         noWorkouts: "لايوجد تمارين تطابق بحثك",
         foundForSearch: "",
         week: "الاسبوع",
+        weeks:"اسبوع -اسابيع",
         numberDaysWeek: "عدد الايام في الاسبوع",
         numberWorkoutDay: "عدد التمارين في اليوم",
         numberWeek: "عدد الاسابيع",
@@ -170,6 +190,7 @@ Specification: "Specification"
         High: "{{value}}  عالي رقم",
         CoolDown: "{{value}} الاستراحه",
         Weight: "  {{value}}تمرين الوزن",
+        weight:"الوزن",
         Exercise: "تدريب",
         time: "الوقت",
         cartDetails: "تفاصيل سلة الشراء",
@@ -179,7 +200,7 @@ Specification: "Specification"
         clearCart: "تفريغ السلة ؟",
         emptyCart: "سلة الشراءالان اصبحت فارغة",
         undo: "تراجع ؟",
-        paymentStatus: "حالة الشراء",
+        paymentStatusPage: "حالة الشراء",
         Success: "تم بنجاح",
         workoutsAdded: "اضافة التمارين الى حسابك الشخصي ,تم ارسال ايميل لحسابك ",
         Error: "!خطأ",
@@ -190,11 +211,25 @@ Specification: "Specification"
         addWorkout: "اضف تدريب",
         youBoughtItem: "لقد اشتريت هذا المنتج من قبل",
         clearFilters:"ازاله كل خيارات البحث ؟"
-        , PaymentTerms: ""
+        , PaymentTerms: "يتم تطبيق البنود والشروط العامة، والتي يمكنك أن تجدها في fitnessyard.com الموقع. سيتم تجديد اشتراكك تلقائيا. وستحمل أي رسوم العضوية تلقائيا من بطاقة الائتمان الخاصة بك أو من خلال حسابك المصرفي. يمكنك إلغاء اشتراكك في أي وقت عن طريق زيارة صفحة معلومات الفواتير أو مراسلتنا على tosupport@fitnessyard.com البريد الإلكتروني. سوف تبدأ عضويتك ثم تنتهي تلقائيا بعد فترة العقد، حتى انها لن تكون مشحونة مرة أخرى."
         , intensityLevel: " درجة الشدة",
         mainGoal: "الهدف الرئيسي"
         , duration: "المدة",
-        Specification: "المواصفات"
+        Specification: "المواصفات",
+        free: "مجانا",
+        totalItems: "المجموع",
+        itemInCart: "هذا المنتج في سلة شرائك ",
+        remove: "ازالة",
+        kg: "كغ",
+        sec: "ثانية",
+        byWeekDuraion: "عدد الأسابيع"
+        , items: "عناصر",
+        item: "عنصر",
+        previous: "السابق",
+        next: "التالي",
+        lastPage:"الصفحة الاخيرة",
+        firstPage:"الصفحة الاولى"
+
 
     });
    $translateProvider.preferredLanguage($("#hdn_tm_culture").val());

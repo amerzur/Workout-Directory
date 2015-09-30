@@ -64,7 +64,9 @@
     }
 
     var addDaystoWorkouts = function (workoutlist) {
-        var fd = workoutlist[0].WorkoutDateOnly.split("/")
+        if (workoutlist.length && workoutlist[0].WorkoutDateOnly)
+        {
+ var fd = workoutlist[0].WorkoutDateOnly.split("/")
         var firstday = new Date(fd[2], fd[1] - 1, fd[0]);
         var Daynum=1;
         angular.forEach(workoutlist, function (value, key) { 
@@ -78,6 +80,11 @@
              workoutlist[key].DayNum = Daynum;   
         });
         return workoutlist;
+        }else
+        {
+            return;
+        }
+       
     }
 
     var convertPurchaseItemsToInt = function (purchsedList) {

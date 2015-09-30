@@ -13,12 +13,9 @@
                 workoutService.setPurchasedItems($scope.PurchaseItems);
             }
         });
-        $scope.goDetails = function (item) {
-             
-            //$("#hdnViewExercisePlanURL").val();
-            //workoutService.addStoreItemDetails(item)
+        $scope.goDetails = function (item) { 
 
-            $state.go("WorkoutDetails", { "workoutID": item.FK_ItemId })
+            $state.go("WorkoutDetails", { "workoutID": item.FK_ItemId, "planTypeID": item.ItemType });
 
         };
 

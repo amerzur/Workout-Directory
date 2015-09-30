@@ -5,12 +5,12 @@
         <div class="sidebar col-md-3 col-sm-5 " ng-init="GetFiltersList()">
             <!--<div cg-busy="myPromise"></div>-->
             <div class="row margin-bottom-10">
-                <div class="col-md-12  " style="z-index: 999;padding: 10px;">
+                <div class="col-md-12  " style="z-index: 999; ">
 
                     <ul class="list-group margin-bottom-10 sidebar-menu  no-margin">
 
                         <li class="list-group-item">
-                            <label translate="cartSummary">   </label>
+                            <span translate="cartSummary">   </span>
                             <a href="#" ui-sref="cartDetails">
                                 <div class="input-group">
 
@@ -31,18 +31,19 @@
                             
                              
                             <button type="button" class="btn btn-primary btn-xs pointer-curser" ng-click="clearFilters()">
-                                <span class="glyphicon glyphicon-trash pointer-curser"></span> <label translate="clearFilters" class="pointer-curser"></label>
+                                <span class="glyphicon glyphicon-trash pointer-curser"></span> 
+                                <span translate="clearFilters" class="pointer-curser"></span>
                             </button>
                         </li>
                         <li class="list-group-item">
-                            <label translate="searchForWorkout"> </label>
+                            <span translate="searchForWorkout"> </span>:
                             <div class="input-group">
                                 <span class="input-group-addon" ng-click="SearchWorkoutName()">
                                     <i class="fa fa-search"></i>
                                 </span>
                                 <span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span>
                                 <input type="text" class="form-control ui-autocomplete-input" id="txtexerciseName" ng-model="Criteria.PlanName"
-                                       ng-change="SearchWorkoutName()" autocomplete="off" placeholder="Search for Workout :">
+                                       ng-change="SearchWorkoutName()" autocomplete="off" placeholder="{{'searchForWorkout'| translate}}">
 
                             </div>
 
@@ -50,7 +51,7 @@
 
                         <li class="list-group-item">
                             <!--<slider ng-model="sliders.sliderValue" min="" step="sliderOptions.step" max=""  ></slider>-->
-                            <label> By Week Duration </label>
+                            <span translate="byWeekDuraion">  </span>
                             <div range-slider min="sliderOptions.min" max="sliderOptions.max" model-min="Criteria.minWeek" model-max="Criteria.maxWeek" show-values="true" prevent-equal-min-max="true" on-handle-up="setToFirstPage()"></div>
                         </li>
                         <accordion close-others="false">
@@ -61,10 +62,10 @@
                                 </accordion-heading>
                                 <ul>
                                     <li class="checkbox" ng-repeat="item in FreeOrPaid">
-                                        <label>
+                                        <span>
                                             <input id="{{item.id}}" name="{{item.ItemName}}" value="{{item}}" type="checkbox"
                                                    ng-checked="FreeOrPaidSelected.indexOf(item) > -1 " style="  height: 15px;" ng-click="toggleFree(item)"><span ng-bind="getFilterText(item)"> </span>
-                                        </label>
+                                        </span>
 
                                     </li>
                                 </ul>
@@ -92,10 +93,10 @@
                                 </accordion-heading>
                                 <ul>
                                     <li class="checkbox" ng-repeat="item in CompleteOrDay">
-                                        <label>
+                                        <span>
                                             <input id="{{item.id}}" name="{{item.ItemName}}" value="{{item}}" type="checkbox"
                                                    ng-checked="CompleteOrDaySelected.indexOf(item) > -1" style="  height: 15px;" ng-click="toggleCompleteOrDay(item)"><span ng-bind="getFilterText(item)"> </span>
-                                        </label>
+                                        </span>
 
                                     </li>
                                 </ul>
@@ -141,10 +142,10 @@
                                 </accordion-heading>
                                 <ul id="">
                                     <li class="checkbox" ng-repeat="item in levelList">
-                                        <label>
+                                        <span>
                                             <input name=" abdominals" value="{{item}}" type="checkbox"
                                                    ng-checked="LevelSelected.indexOf(item) > -1" ng-click="toggleSelection(item)" style="  height: 15px;">   <span ng-bind="getFilterText(item)"> </span>
-                                        </label>
+                                        </span>
 
                                     </li>
                                 </ul>
@@ -155,10 +156,10 @@
                                 </accordion-heading>
                                 <ul>
                                     <li class="checkbox" ng-repeat="item in PlanTypes">
-                                        <label>
+                                        <span>
                                             <input name=" abdominals" value="{{item}}" type="checkbox"
                                                    ng-checked="PlanTypesSelected.indexOf(item) > -1" style="  height: 15px;" ng-click="toggleSelectedPlanType(item)"><span ng-bind="getFilterText(item)"> </span>
-                                        </label>
+                                        </span>
 
                                     </li>
                                 </ul>
@@ -188,10 +189,10 @@
                                 </accordion-heading>
                                 <ul>
                                     <li class="checkbox" ng-repeat="item in Objectives">
-                                        <label>
+                                        <span>
                                             <input id="{{item.id}}" name="{{item.ItemName}}" value="{{item}}" type="checkbox"
                                                    ng-checked="ObjectiveSelected.indexOf(item) > -1" style="  height: 15px;" ng-click="toggleObjective(item)">{{item.ItemName}}
-                                        </label>
+                                        </span>
 
                                     </li>
                                 </ul>
@@ -221,10 +222,10 @@
                                 </accordion-heading>
                                 <ul>
                                     <li class="checkbox" ng-repeat="item in BodyParts">
-                                        <label>
+                                         <span>
                                             <input id="{{item.id}}" name="{{item.ItemName}}" value="{{item}}" type="checkbox"
                                                    ng-checked="BodyPartsSelected.indexOf(item) > -1" style="  height: 15px;" ng-click="toggleBodyPart(item)">{{item.ItemName}}
-                                        </label>
+                                        </span>
 
                                     </li>
                                 </ul>
@@ -258,7 +259,7 @@
 
         <!-- END SIDEBAR -->
         <!-- BEGIN CONTENT -->
-        <div class="col-md-9 col-sm-7 plans-container  ">
+        <div class="col-md-9 col-sm-7   ">
             <div ng-controller="CompletePlansController">
 
                 <div cg-busy="myPromise"></div>
@@ -267,22 +268,22 @@
                        
                             <ul class="nav navbar-nav">
                                 <li>
-                                    <a class="store-header-item"> <h3 translate="chooseWorkout"> <span translate="addToCart"></span>- </h3></a>
+                                    <a class="store-header-item"> <span translate="chooseWorkout"> <span translate="addToCart"></span>- </span></a>
                                 </li>
                                 <li>
-                                    <a class="store-header-item"> <h3>Total Items:&nbsp;{{TotalItems}}</h3></a>
+                                    <a class="store-header-item"> <span><div translate="totalItems"></div> :&nbsp;{{TotalItems}}</span></a>
                                 </li>
                                  
                             </ul>
                            <ul class="nav navbar-nav">
                                <li data-ng-class="{active: ! listDisplayModeEnabled}" class="toolbaritem pointer-curser">
                                    <a data-ng-click=" changeDisplayMode( DisplayModeEnum.Card)">
-                                       <span class="glyphicon glyphicon-th-large"></span> &nbsp;<label translate="cardView" class="pointer-curser"></label> <!--Card View-->
+                                       <span class="glyphicon glyphicon-th-large"></span> &nbsp;<span translate="cardView" class="pointer-curser"></span> <!--Card View-->
                                    </a>
                                </li>
                                <li data-ng-class="{active: listDisplayModeEnabled}" class="toolbaritem pointer-curser">
                                    <a data-ng-click=" changeDisplayMode( DisplayModeEnum.List)">
-                                       <span class="glyphicon glyphicon-align-justify"></span>&nbsp; <label translate="listView" class="pointer-curser"></label><!--List View-->
+                                       <span class="glyphicon glyphicon-align-justify"></span>&nbsp; <span translate="listView" class="pointer-curser"></span><!--List View-->
                                    </a>
                                </li>
                                <li class="toolbaritem pointer-curser" ng-show="UserID==AdminID" id="addWorkoutBtn">
@@ -297,7 +298,10 @@
 
                 </div>
                 <br />
-                <pagination total-items="TotalItems" ng-model="Pagination.CurrentPage" max-size="maxSize" class="pagination-sm store-pagination" boundary-links="true"></pagination>
+                <div class="row">
+                    <pagination total-items="TotalItems" ng-model="Pagination.CurrentPage" max-size="maxSize" class="pagination-sm col-sm-offset-1 " boundary-links="true" previous-text="{{'previous' | translate}}" next-text="{{'next' | translate}}" first-text="{{'firstPage'|translate}}" last-text="{{'lastPage'|translate}}"></pagination>
+                </div>
+                
                 <!-- card view of store items  -->
                 <div class="  " data-ng-show="!listDisplayModeEnabled">
 
@@ -308,7 +312,7 @@
                                 <div class="store-card-item">
                                     <div class="cardBody">
                                         <div class="clearfix">
-                                            <div class="store-card-image">
+                                            <div class=" ">
                                                 <a href="#" ng-click="goDetails(item)" class="white"> <img ng-src="{{item.Picture}}?height=280&width=370&mode=crop&format=jpg&quality=90" /></a>
                                             </div>
                                             <div class="store-card-color">
@@ -321,32 +325,33 @@
                                                 <div class=" store-card-details">
                                                     <div class="store-card-header pointer-curser text-center-sm">
                                                         <h2 ng-click="goDetails(item)">{{item.DisplayName }}</h2>
+                                                        <span class="store-description">{{item.Description| limitTo:100 }}</span>
                                                     </div>
 
 
-                                                    <ul>
-                                                        <li><span>Plan Type: <strong ng-bind="getPlanTypeString(item.ItemType)">  </strong></span></li>
-                                                        <li><span>Intensity Level: <strong ng-bind="getLevelString(item.ExerciseLevel ||item.UserExerciseLevel)">  </strong></span></li>
-                                                        <li><span> Main Goal: <strong ng-bind="item.ObjectiveName"></strong></span></li>
-                                                        <li ng-show="item.ItemType==2"><span>Duration : <strong>{{item.Duration}}&nbsp;  Weeks</strong></span></li>
+                                                    <ul class="col-sm-offset-1">
+                                                        <li> <span translate="planType"></span>:  <strong ng-bind="getPlanTypeString(item.ItemType)">  </strong> </li>
+                                                        <li> <span translate="intensityLevel"></span> : <strong ng-bind="getLevelString(item.ExerciseLevel ||item.UserExerciseLevel)">  </strong> </li>
+                                                        <li> <span translate="mainGoal"></span>: <strong ng-bind="item.ObjectiveName"></strong> </li>
+                                                        <li ng-show="item.ItemType==2"> <span translate="duration"></span> : <strong>{{item.Duration}}&nbsp; <strong translate="weeks"></strong></strong> </li>
                                                     </ul>
                                                     <br />
                                                     <div ng-hide="item.isPurchased">
 
                                                         <div ng-if="item.Price===0">
-                                                            <div class="details-price pointer-curser" ng-click="addToAccount(item)">
-                                                                <strong>Free</strong>
+                                                            <div class="details-price pointer-curser  col-sm-offset-1 col-sm-10" ng-click="addToAccount(item)">
+                                                                <strong translate="free">Free</strong>
                                                             </div>
                                                         </div>
                                                         <div ng-if="item.Price!=0">
-                                                            <div class="details-price pointer-curser" ng-click="  addToCart(item)" ng-show="!showAddedToCart(item.ProductID) ">
-                                                                <strong>{{item.Price | currency:"USD$"}}</strong>
+                                                            <div class="details-price pointer-curser  col-sm-offset-1 col-sm-10" ng-click="  addToCart(item)" ng-show="!showAddedToCart(item.ProductID) ">
+                                                                <strong>{{item.Price | currency:" USD$ "}}</strong>
 
 
                                                             </div>
-                                                            <div class="details-price pointer-curser" ng-show="showAddedToCart(item.ProductID)">
+                                                            <div class="details-price pointer-curser  col-sm-offset-1 col-sm-10" ng-show="showAddedToCart(item.ProductID)">
                                                                 <strong>
-                                                                    This item is in your cart. <a ng-click=" removeItemById(item.ProductID)" class="pointer-curser"  >Remove</a>
+                                                                    <span translate="itemInCart"></span>  <a ng-click=" removeItemById(item.ProductID)" class="pointer-curser"><span translate="remove"></span> </a>
                                                                 </strong>
                                                             </div>
                                                         </div>
@@ -354,7 +359,7 @@
                                                     <div ng-show="item.isPurchased">
                                                         <div class="details-price pointer-curser" ng-click="goPurchaseItems()">
                                                             <strong>
-                                                                <i class="fa fa-info"></i>  you are allready bought this item
+                                                                <i class="fa fa-info"></i>&nbsp; <span translate="youBoughtItem"></span> 
                                                             </strong>
                                                         </div>
                                                     </div>
@@ -387,7 +392,7 @@
                     <div data-ng-repeat="item in Workouts">
                         <div class="row store-list-item">
                             <div class="col-sm-6">
-                                <div class="store-list-image pointer-curser" ng-click="goDetails(item)"><img ng-src="{{item.Picture}}?height=396&width=480&mode=crop&format=jpg&quality=90" /></div>
+                                <div class="store-list-image pointer-curser" ng-click="goDetails(item)"><img ng-src="{{item.Picture}}?height=460&width=480&mode=crop&format=jpg&quality=90" /></div>
                             </div>
 
 
@@ -401,35 +406,33 @@
                                     
                                     <div class="store-list-header pointer-curser text-center-sm">
                                         <h2 ng-click="goDetails(item)">{{item.DisplayName }}</h2>
+                                        <span class="store-description">{{item.Description| limitTo:100 }}</span>
                                     </div>
 
 
-                                    <ul>
-                                        <li><span>Plan Type: <strong ng-bind="getPlanTypeString(item.ItemType)">  </strong></span></li>
-                                        <li><span>Intensity Level: <strong ng-bind="getLevelString(item.ExerciseLevel ||item.UserExerciseLevel)">  </strong></span></li>
-                                        <li><span> Main Goal: <strong ng-bind="item.ObjectiveName"></strong></span></li>
-                                        <li ng-show="item.ItemType==2"><span>Duration : <strong>{{item.Duration}}&nbsp;  Weeks</strong></span></li>
+                                    <ul class="col-sm-offset-1">
+                                        <li><span><span translate="planType"></span> <strong ng-bind="getPlanTypeString(item.ItemType)">  </strong></span></li>
+                                        <li><span><span translate="intensityLevel"></span>: <strong ng-bind="getLevelString(item.ExerciseLevel ||item.UserExerciseLevel)">  </strong></span></li>
+                                        <li><span> <span translate="mainGoal"></span>: <strong ng-bind="item.ObjectiveName"></strong></span></li>
+                                        <li ng-show="item.ItemType==2"><span><span translate="duration"></span>: <strong>{{item.Duration}}&nbsp;  <span translate="weeks"></span></strong></span></li>
                                     </ul>
-
-
-                                    <br />
-                                    <br /><br />
+ 
                                     <div ng-hide="item.isPurchased">
 
                                         <div ng-if="!showAddedToCart(item.ProductID) &&item.Price===0">
-                                            <div class="details-price pointer-curser" ng-click="addToAccount(item)">
-                                                <strong>Free</strong>
+                                            <div class="details-price pointer-curser col-sm-offset-1 col-sm-10" ng-click="addToAccount(item)">
+                                                <strong translate="free">Free</strong>
                                             </div>
                                         </div>
                                         <div ng-if="!showAddedToCart(item.ProductID) && item.Price!=0">
-                                            <div class="details-price pointer-curser" ng-click="addToCart(item)">
+                                            <div class="details-price pointer-curser col-sm-offset-1 col-sm-10" ng-click="addToCart(item)">
                                                 <strong>{{item.Price | currency:"USD$"}}</strong>
                                             </div>
                                         </div>
                                         
                                         <div ng-if=" showAddedToCart(item.ProductID)">
-                                            <div class="details-price pointer-curser">
-                                                <strong>   This item is in your cart. <a ng-click=" removeItemById(item.ProductID)" style="cursor: pointer;">Remove</a></strong>
+                                            <div class="details-price pointer-curser col-sm-offset-1 col-sm-10">
+                                                <strong> <span translate="itemInCart"></span>   <a ng-click=" removeItemById(item.ProductID)" style="cursor: pointer;"><span translate="remove"></span></a></strong>
                                             </div></div>
                                     </div>
                                    
@@ -437,7 +440,7 @@
                                         <div ng-show="item.isPurchased">
                                             
                                             <div class="details-price  pointer-curser" ng-click="goPurchaseItems()">
-                                                <strong>you allready added this item</strong>
+                                                <strong translate="youBoughtItem">you allready added this item</strong>
                                             </div>
 
                                         </div>
@@ -467,7 +470,7 @@
                 </div>
                  
 
-                <pagination total-items="TotalItems" ng-model="Pagination.CurrentPage" max-size="maxSize" class="pagination-sm store-pagination" boundary-links="true"></pagination>
+                <pagination total-items="TotalItems" ng-model="Pagination.CurrentPage" max-size="maxSize" class="pagination-sm col-sm-offset-1 " boundary-links="true" previous-text="{{'previous' | translate}}" next-text="{{'next' | translate}}" first-text="{{'firstPage'|translate}}" last-text="{{'lastPage'|translate}}"></pagination>
 
                 <hr />
 

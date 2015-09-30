@@ -3,10 +3,12 @@
          <div cg-busy="{promise: statusPromise,message:'Loading',backdrop:true  }">
 
              <div class="WhiteTitle">
-                 <h3 translate="paymentStatus"> </h3>
-                 <a href="#" ui-sref="Home" class="back-to-list">
-                     <i class="fa fa-arrow-left fa-1x"></i><label translate="back" class="pointer-curser">back</label>
-                 </a>
+                 <div class="row">
+                     <h3 translate="paymentStatusPage" class="col-sm-3"> </h3>
+                     <a href="#" ui-sref="Home" class="col-sm-6 ">
+                         <i class="fa fa-arrow-left fa-1x"></i><label translate="back" class="pointer-curser" style=" font-size: large; ">back</label>
+                     </a>
+                 </div>
              </div>
              <div class="whiteSlider ">
                  <div class="alert alert-success fade in" ng-show="paymentStatus.Success">

@@ -1,7 +1,7 @@
 ﻿WDApp.controller("CartDetailsController", ["$scope", "$rootScope", "$state", "ngCart", "workoutService", "$http","$window",
 function ($scope, $rootScope, $state, ngCart, workoutService, $http, $window) {
   
-    $window.document.title = "FitnessYard.com Cart Details";
+    $window.document.title = "Fitnessyard Cart Details";
     $scope.cartList = ngCart.getItems();
     $scope.isUndo=false
     $scope.removeFromCart = function (itemID) {
@@ -41,7 +41,10 @@ function ($scope, $rootScope, $state, ngCart, workoutService, $http, $window) {
         }); 
         } else
         {
-            toastr.info("please login first");
+            if ($rootScope.currentLanguage() == "en-US")
+                toastr.info("please login first");
+            else
+                toastr.info("الرجاء تسجيل الدخول اولا ");
 
         }
         
