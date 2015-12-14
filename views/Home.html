@@ -264,14 +264,14 @@
 
                 <div cg-busy="myPromise"></div>
                 <div class="row">
-                    <div class="col-md-12 WhiteTitle" id="store-header">
+                    <div class="col-md-12  " id="store-header">
                        
                             <ul class="nav navbar-nav">
-                                <li>
+                                <!--<li>
                                     <a class="store-header-item"> <span translate="chooseWorkout"> <span translate="addToCart"></span>- </span></a>
-                                </li>
+                                </li>-->
                                 <li>
-                                    <a class="store-header-item"> <span><div translate="totalItems"></div> :&nbsp;{{TotalItems}}</span></a>
+                                    <span class="store-header-item"> <span><span translate="totalItems"></span> :&nbsp;{{TotalItems}}</span></span>
                                 </li>
                                  
                             </ul>
@@ -286,9 +286,9 @@
                                        <span class="glyphicon glyphicon-align-justify"></span>&nbsp; <span translate="listView" class="pointer-curser"></span><!--List View-->
                                    </a>
                                </li>
-                               <li class="toolbaritem pointer-curser" ng-show="UserID==AdminID" id="addWorkoutBtn">
+                               <li class="toolbaritem pointer-curser" ng-show="canEdit()" id="addWorkoutBtn">
                                    <a ng-click="addWorkout()">
-                                       <span class="glyphicon glyphicon-plus"></span><label translate="addWorkout" class="pointer-curser">Add Workout</label>
+                                       <span class="glyphicon glyphicon-plus"></span><span translate="addWorkout" class="pointer-curser">Add Workout</span>
                                    </a>
                                </li>
                            </ul>
@@ -298,26 +298,26 @@
 
                 </div>
                 <br />
-                <div class="row">
+                <div class="row ">
                     <pagination total-items="TotalItems" ng-model="Pagination.CurrentPage" max-size="maxSize" class="pagination-sm col-sm-offset-1 " boundary-links="true" previous-text="{{'previous' | translate}}" next-text="{{'next' | translate}}" first-text="{{'firstPage'|translate}}" last-text="{{'lastPage'|translate}}"></pagination>
                 </div>
                 
                 <!-- card view of store items  -->
-                <div class="  " data-ng-show="!listDisplayModeEnabled">
+                <div class="   "  data-ng-show="!listDisplayModeEnabled">
 
-                    <div class="row   show-hide-animation">
+                    <div class="row  ">
 
-                        <div class="col-sm-6  card-animation" ng-repeat="item in Workouts">
+                        <div class="col-sm-6 " ng-repeat="item in Workouts">
                             <div cg-busy="{promise:addToAccountPromise,message:'Loading',backdrop:true  }">
                                 <div class="store-card-item">
                                     <div class="cardBody">
                                         <div class="clearfix">
                                             <div class=" ">
-                                                <a href="#" ng-click="goDetails(item)" class="white"> <img ng-src="{{item.Picture}}?height=280&width=370&mode=crop&format=jpg&quality=90" /></a>
+                                                <a href="#" ng-click="goDetails(item)" class="white"> <img ng-src="{{item.Picture}}?height=280&width=423&mode=crop&format=jpg&quality=90" /></a>
                                             </div>
                                             <div class="store-card-color">
 
-                                                <div ng-show="UserID==AdminID" class="pull-right">
+                                                <div ng-show="canEdit()" class="pull-right">
                                                     <i class="fa fa-pencil-square-o fa-2x pointer-curser " tooltip=" edit item  " ng-click="editStoreItem(item)"></i>&nbsp;
 
                                                     <i class="fa fa-times fa-2x pointer-curser" ng-click="removeStoreItem(item)" tooltip="remove this item form store "></i>
@@ -359,20 +359,20 @@
                                                     <div ng-show="item.isPurchased">
                                                         <div class="details-price pointer-curser" ng-click="goPurchaseItems()">
                                                             <strong>
-                                                                <i class="fa fa-info"></i>&nbsp; <span translate="youBoughtItem"></span> 
+                                                                <i class="fa fa-info"></i>&nbsp; <span translate="youBoughtItem"></span>
                                                             </strong>
                                                         </div>
                                                     </div>
                                                     <!--<div ng-show="item.isAdding">
-                                                        <div class="details-price pointer-curser" ng-click="goPurchaseItems()">
-                                                            <strong>
-                                                                <i class="fa fa-info"></i>  Loading ....
-                                                            </strong>
-                                                        </div>
-                                                    </div>-->
+                                            <div class="details-price pointer-curser" ng-click="goPurchaseItems()">
+                                                <strong>
+                                                    <i class="fa fa-info"></i>  Loading ....
+                                                </strong>
+                                            </div>
+                                        </div>-->
 
 
-                                                   
+
 
                                                 </div>
                                             </div>
@@ -381,27 +381,27 @@
 
                                 </div>
                             </div>
-                            </div>
+                        </div>
                     </div>
 
                 </div>
                 <!-- end card view  -->
                 <!-- list view of store -->
-                <div class="  gridContainer customersTable show-hide-animation  " data-ng-show="listDisplayModeEnabled">
+                <div class="    customersTable   " data-ng-show="listDisplayModeEnabled">
 
                     <div data-ng-repeat="item in Workouts">
                         <div class="row store-list-item">
                             <div class="col-sm-6">
-                                <div class="store-list-image pointer-curser" ng-click="goDetails(item)"><img ng-src="{{item.Picture}}?height=460&width=480&mode=crop&format=jpg&quality=90" /></div>
+                                <div class="store-list-image pointer-curser" ng-click="goDetails(item)"><img ng-src="{{item.Picture}}?height=467&width=480&mode=crop&format=jpg&quality=90" /></div>
                             </div>
 
 
                             <div class="col-sm-6 ">
                                 <div class="store-list-color">
-                                    <div class="pull-right" ng-show="UserID==AdminID">
-                                      <i class="fa fa-pencil-square-o fa-2x pointer-curser " tooltip=" edit item  " ng-click="editStoreItem(item)"></i>&nbsp;
-                                    
-                                      <i class="fa fa-times fa-2x pointer-curser" ng-click="removeStoreItem(item)" tooltip="remove this item form store "></i>
+                                    <div class="pull-right" ng-show="canEdit()">
+                                        <i class="fa fa-pencil-square-o fa-2x pointer-curser " tooltip=" edit item  " ng-click="editStoreItem(item)"></i>&nbsp;
+
+                                        <i class="fa fa-times fa-2x pointer-curser" ng-click="removeStoreItem(item)" tooltip="remove this item form store "></i>
                                     </div> 
                                     
                                     <div class="store-list-header pointer-curser text-center-sm">
@@ -454,11 +454,7 @@
                 <!-- end list view  -->
 
                 <div class="container whiteSlider" ng-show="!Workouts.length">
-                    <!--<div class="row show-hide-animation">
-                        <div class="col-span-12">
-                            <h4>No Workouts</strong> found</h4>
-                        </div>
-                    </div>-->
+                    
 
                     <div class="alert alert-warning fade in">
                         <button class="close" data-dismiss="alert" ng-click="restSearchDefault()">
@@ -469,9 +465,9 @@
                     </div>
                 </div>
                  
-
-                <pagination total-items="TotalItems" ng-model="Pagination.CurrentPage" max-size="maxSize" class="pagination-sm col-sm-offset-1 " boundary-links="true" previous-text="{{'previous' | translate}}" next-text="{{'next' | translate}}" first-text="{{'firstPage'|translate}}" last-text="{{'lastPage'|translate}}"></pagination>
-
+                <div class=" row">
+                    <pagination total-items="TotalItems" ng-model="Pagination.CurrentPage" max-size="maxSize" class="pagination-sm col-sm-offset-1 " boundary-links="true" previous-text="{{'previous' | translate}}" next-text="{{'next' | translate}}" first-text="{{'firstPage'|translate}}" last-text="{{'lastPage'|translate}}"></pagination>
+                </div>
                 <hr />
 
 
@@ -499,12 +495,12 @@
                                                     <div class="col-md-12">
 
 
-                                                        <label class="control-label col-md-4" for="DName">
-                                                            DisplayName <span class="require"> * </span>
+                                                        <span class="control-label col-md-4" for="DName">
+                                                           <span translate="name"></span>    <span class="require"> * </span>
 
-                                                        </label>
+                                                        </span>
                                                         <div class="col-md-8">
-                                                            <input type="text" placeholder=' name ' class="form-control input-medium" name="DName" ng-model="selectedItem.DisplayName" ng-model-options="{ updateOn: 'blur' }" required>
+                                                            <input type="text" placeholder="{{'name'|translate}}" class="form-control input-medium" name="DName" ng-model="selectedItem.DisplayName" ng-model-options="{ updateOn: 'blur' }" required>
 
                                                             <div ng-show="addForm.$submitted || addForm.DName.$touched">
                                                                 <code ng-show="addForm.DName.$error.required ">Dispaly Name is required.</code>
@@ -512,12 +508,12 @@
                                                         </div>
 
 
-                                                        <label class="control-label col-md-4" for="Price">
-                                                            Price <span class="require"> * </span>
+                                                        <span class="control-label col-md-4" for="Price">
+                                                            <span translate="price"></span>  <span class="require"> * </span>
 
-                                                        </label>
+                                                        </span>
                                                         <div class="col-md-8">
-                                                            <input type="number" min="0" placeholder='price' class="form-control input-medium" name="Price" ng-model="selectedItem.Price" required>
+                                                            <input type="number" min="0" placeholder="{{'price'|translate}}" class="form-control input-medium" name="Price" ng-model="selectedItem.Price" required>
 
                                                             <div ng-show="addForm.$submitted || addForm.Price.$touched">
                                                                 <code ng-show="addForm.Price.$error.required ">price is required.</code>
@@ -526,26 +522,16 @@
                                                         </div>
 
 
+ 
 
-                                                        <!--<label class="control-label col-md-4">
-                                                            ProductImage
 
-                                                        </label>
+
+                                                        <span class="control-label col-md-4" translate="video">
+                                                          
+
+                                                        </span>
                                                         <div class="col-md-8">
-                                                            <input type="text" placeholder=' ProductImage ' class="form-control input-medium" name="ProductImage" ng-model="selectedItem.Picture">
-                                                            <span class="help-block" id="Validate1"></span>
-
-
-                                                        </div>-->
-
-
-
-                                                        <label class="control-label col-md-4">
-                                                            ProductVideo
-
-                                                        </label>
-                                                        <div class="col-md-8">
-                                                            <input type="text" placeholder=' ProductVideo ' class="form-control input-medium" name="ProductVideo" ng-model="selectedItem.Video">
+                                                            <input type="text" placeholder="{{'video'|translate}}" class="form-control input-medium" name="ProductVideo" ng-model="selectedItem.Video">
                                                             <span class="help-block" id="Validate2"></span>
 
 
@@ -553,7 +539,7 @@
                                                         <div ng-hide="hasImage   ">
                                                             <!-- file uploader starts  -->
 
-                                                            <label class="control-label col-md-4">Product Image</label>
+                                                            <span class="control-label col-md-4" translate="productImage">Product Image</span>
                                                             <div ng-show="uploader.isHTML5">
                                                                 <!-- 3. nv-file-over uploader="link" over-class="className" -->
                                                                 <!--<div class="well my-drop-zone" nv-file-over="" uploader="uploader">
@@ -574,10 +560,10 @@
                                                             <table class="table">
                                                                 <thead>
                                                                     <tr>
-                                                                        <th width="50%">Name</th>
-                                                                        <th ng-show="uploader.isHTML5">Size</th>
-                                                                        <th ng-show="uploader.isHTML5">Progress</th>
-                                                                        <th>Status</th>
+                                                                        <th width="50%" translate="name">Name</th>
+                                                                        <th ng-show="uploader.isHTML5" translate="size">Size</th>
+                                                                        <th ng-show="uploader.isHTML5" translate="progress">Progress</th>
+                                                                        <th translate="status">Status</th>
                                                                         <!--<th>Actions</th>-->
                                                                     </tr>
                                                                 </thead>
@@ -622,20 +608,20 @@
 
                                                             <div>
                                                                 <div>
-                                                                    Queue progress:
-                                                                    <span class="alert alert-warning" ng-show="addForm.$invalid  "><span class="glyphicon glyphicon-ban-circle"></span> you must complete the requierd fileds before upload the image </span>
+                                                                   <span translate="queueProgress"></span> :
+                                                                    <span class="alert alert-warning" ng-show="addForm.$invalid  "><span class="glyphicon glyphicon-ban-circle"></span><span translate="modalMustComplete"></span>  </span>
                                                                     <div class="progress" style="">
                                                                         <div class="progress-bar" role="progressbar" ng-style="{ 'width': uploader.progress + '%' }"></div>
                                                                     </div>
                                                                 </div>
                                                                 <button type="button" class="btn btn-success btn-s" ng-click="uploader.uploadAll()" ng-disabled="!uploader.getNotUploadedItems().length ||addForm.$invalid ">
-                                                                    <span class="glyphicon glyphicon-upload"></span> Upload all
+                                                                    <span class="glyphicon glyphicon-upload"></span><span translate="uploadAll"></span>  
                                                                 </button>
                                                                 <button type="button" class="btn btn-warning btn-s" ng-click="uploader.cancelAll()" ng-disabled="!uploader.isUploading">
-                                                                    <span class="glyphicon glyphicon-ban-circle"></span> Cancel all
+                                                                    <span class="glyphicon glyphicon-ban-circle"></span><span translate="cancelAll"></span>  
                                                                 </button>
                                                                 <button type="button" class="btn btn-danger btn-s" ng-click="uploader.clearQueue()" ng-disabled="!uploader.queue.length">
-                                                                    <span class="glyphicon glyphicon-trash"></span> Remove all
+                                                                    <span class="glyphicon glyphicon-trash"></span><span translate="removeAll"></span> 
                                                                 </button>
                                                             </div>
 
@@ -651,7 +637,7 @@
                                                                     <td><img ng-src="{{selectedItem.Picture}}" /></td>
                                                                     <td>
                                                                         <button type="button" class="btn btn-danger btn-xs" ng-click="switchImage()">
-                                                                            <span class="glyphicon glyphicon-trash"></span> Remove
+                                                                            <span class="glyphicon glyphicon-trash"></span> <span translate="remove"></span> 
                                                                         </button>
                                                                     </td>
                                                                 </tr>
@@ -717,11 +703,11 @@
                                                                         <div data-toggle="buttons" class="input-group-btn">
                                                                             <label class="btn btn-primary" ng-class="{active:itemType==1}" ng-click="itemType=1">
                                                                                 <input type="radio" class="toggle">
-                                                                                Workout
+                                                                               <span translate="workout"></span>  
                                                                             </label>
                                                                             <label class="btn btn-primary" ng-class="{active:itemType==2}" ng-click="itemType=2">
                                                                                 <input type="radio" class="toggle">
-                                                                                WorkoutPlan
+                                                                            <span translate="workoutPlan"></span>     
                                                                             </label>
 
                                                                         </div>
@@ -744,7 +730,7 @@
                                                                         <input type="hidden" ng-model="selectedItem.FK_ItemId" name="FK" required />
                                                                         <div class="panel panel-custom" id="NutritionPlanWizard">
                                                                             <div class="panel-heading">
-                                                                                <h3 class="panel-title"> Workout Name /Creation Date / User Name </h3>
+                                                                                <h3 class="panel-title" translate="modalSelectWorkout"></h3>
                                                                             </div>
                                                                             <div class="panel-body" style="max-height: 150px;overflow-y: scroll;">
                                                                                 <ul ng-show="itemType==2">
@@ -764,9 +750,9 @@
                                                                         <div class="input-group-btn" data-toggle="buttons">
                                                                             <button type="submit" ng-disabled=" addForm.$invalid "
                                                                                     class="btn btn-primary" ng-click="save()">
-                                                                                save
+                                                                               <span translate="save"></span> 
                                                                             </button>
-                                                                            <button type="button" class="btn btn-default" ng-click="cancel()">Cancel</button>
+                                                                            <button type="button" class="btn btn-default" ng-click="cancel()"> <span translate="cancel"></span></button>
                                                                         </div>
                                                                     </div>
 

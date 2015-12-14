@@ -1,4 +1,5 @@
-﻿WDApp.controller("WorkoutDetailsListController", ["$scope", "workoutService", "$stateParams","ngCart", "$state","$modal","$location",
+﻿angular.module('WDApp.WorkoutDetailsList', [])
+.controller("WorkoutDetailsListController", ["$scope", "workoutService", "$stateParams", "ngCart", "$state", "$modal", "$location",
     
     function ($scope, workoutService, $stateParams, $state, ngCart,$modal,$location) {
 
@@ -28,13 +29,12 @@
             $scope.StoreItem.Price = workoutService.getWorkoutDetails().Price;
             if ($scope.StoreItem.Price == 0 || $scope.StoreItem.isPurchased )
              {
-               // $scope.priceStyle = {};
+              
                 $scope.priceClass = {}; 
              }
              else
              {
-                //$scope.priceStyle = "{opacity:'0.4'} ";
-                $scope.priceClass = "hidden-exercise";//,"hidden-exercise"];
+                 $scope.priceClass = "hidden-exercise"; 
              }
 
         }

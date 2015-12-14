@@ -1,8 +1,7 @@
-﻿/////////////////////////////////////////////////////////////
-///////////////add workout modal Controller /////////////
-///////////////////////////////////////////////////////////
+﻿ 
 
-WDApp.controller('addWorkoutCtrl', ["$scope", "$modalInstance", "$http", "WDFactory", "FileUploader","workoutService", "storeItem","scope",
+angular.module('WDApp.addWorkout',[])
+ .controller('addWorkoutCtrl', ["$scope", "$modalInstance", "$http", "WDFactory", "FileUploader","workoutService", "storeItem","scope",
 
     function ($scope, $modalInstance, $http, WDFactory, FileUploader, workoutService, storeItem, scope) {
 
@@ -30,20 +29,16 @@ WDApp.controller('addWorkoutCtrl', ["$scope", "$modalInstance", "$http", "WDFact
                 fileItem.formData.push({ Picture: $scope.selectedItem.Picture });
 
         }
-        //
-        //angular uploader object 
-        ///
-        
+         
         var uploader = $scope.uploader = new FileUploader({
             url: "/DesktopModules/FYWorkoutDirectory/api/WorkoutDirectory/SaveStoreItem",
             queueLimit :1
             
         });
-        // FILTERS
-
+ 
         uploader.filters.push({
             name: 'imageFilter',
-            fn: function (item /*{File|FileLikeObject}*/, options) {
+            fn: function (item  , options) {
                 var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
                 return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
             }
@@ -93,9 +88,9 @@ WDApp.controller('addWorkoutCtrl', ["$scope", "$modalInstance", "$http", "WDFact
            
             $scope.hasImage = !$scope.hasImage;
         }
-        // CALLBACKS
+     
 
-        uploader.onWhenAddingFileFailed = function (item /*{File|FileLikeObject}*/, filter, options) {
+        uploader.onWhenAddingFileFailed = function (item  , filter, options) {
             console.info('onWhenAddingFileFailed', item, filter, options);
         };
         uploader.onAfterAddingFile = function (fileItem) {
@@ -154,17 +149,14 @@ WDApp.controller('addWorkoutCtrl', ["$scope", "$modalInstance", "$http", "WDFact
         };
 
         console.info('uploader', uploader);
+ 
 
-        // end angular uploader options 
-        //
-        //////
-
-        $scope.itemType = 2; ///workout plan , 1 for day workout  
+        $scope.itemType = 2;  
 
         $scope.numLimit = 10;
         $scope.$watch('[Pagination.CurrentPage,itemType]', function (newValues) {
            
-            if ($scope.itemType != newValues[1])// check if item type changed .....
+            if ($scope.itemType != newValues[1]) 
                 $scope.Pagination.CurrentPage = 1;
 
             WDFactory.getUsersPlan({ page: $scope.Pagination.CurrentPage, itemType: $scope.itemType }).success(function (data) {

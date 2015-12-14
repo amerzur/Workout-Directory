@@ -6,7 +6,7 @@
                  <div class="row">
                      <h3 translate="paymentStatusPage" class="col-sm-3"> </h3>
                      <a href="#" ui-sref="Home" class="col-sm-6 ">
-                         <i class="fa fa-arrow-left fa-1x"></i><label translate="back" class="pointer-curser" style=" font-size: large; ">back</label>
+                         <i class="fa fa-arrow-left fa-1x"></i><span translate="back" class="pointer-curser" style=" font-size: large; ">back</span>
                      </a>
                  </div>
              </div>
@@ -16,28 +16,28 @@
                          ×
                      </button>
 
-                     <div ng-show="currentlanguage=='en-US'">
-                         <i class="fa-fw fa fa-check"></i> <strong translate="Success"> </strong><label translate="workoutsAdded"></label>
+                    
+                         <i class="fa-fw fa fa-check"></i> <strong translate="Success"> </strong><span translate="workoutsAdded"></span>
 
-                     </div>
-                     <div ng-show="currentlanguage=='ar-JO'">
-                         <label translate="workoutsAdded"></label>  <strong translate="Success"> </strong>  <i class="fa-fw fa fa-check"></i>
+                     
+                     <!--<div ng-show="currentlanguage=='ar-JO'">
+                         <span translate="workoutsAdded"></span>  <strong translate="Success"> </strong>  <i class="fa-fw fa fa-check"></i>
 
-                     </div>
+                     </div>-->
                  </div>
 
                  <div class="alert alert-danger fade in" ng-show="!paymentStatus || !paymentStatus.Success">
                      <button class="close" data-dismiss="alert">
                          ×
                      </button>
-                     <div ng-show="currentlanguage=='en-US'">
+                    
                          <i class="fa-fw fa fa-times"></i>
-                         <strong translate="Error"> </strong> <label translate="transactionNotCompleted"> </label>
-                     </div>
-                     <div ng-show="currentlanguage=='ar-JO'">
+                         <strong translate="Error"> </strong> <span translate="transactionNotCompleted"> </span>
+                     
+                     <!--<div ng-show="currentlanguage=='ar-JO'">
                          <label translate="transactionNotCompleted"> </label><strong translate="Error"> </strong> <i class="fa-fw fa fa-times"></i>
 
-                     </div>
+                     </div>-->
 
                  </div>
 

@@ -1,9 +1,11 @@
-﻿WDApp.factory("WDFactory", function ($http, $q,$resource) {
+﻿angular.module('WDApp.Factory', [])
+
+    .factory("WDFactory", function ($http, $q, $resource) {
     return {
-        
+       
          
         getStoreItems: function (Criteria) {
-            
+             debugger;
             return $http.get('/desktopmodules/FYWorkoutDirectory/api/WorkoutDirectory/GetStoreItems'  , {
                 params: { LevelIDs: Criteria.LevelIDs,
                     PlanTypeIDs: Criteria.PlanTypeIDs,
@@ -13,6 +15,7 @@
                     , Isfree: Criteria.FreeOrPaid
                     , DirectoryTypes: Criteria.CompleteOrDay
                     , page: Criteria.Page,
+                    Culture: $('#hdn_tm_culture').val()
 
                     
                 }
@@ -24,7 +27,7 @@
         GetFiltersList: function () {
             return $http({
                 method: 'GET',
-                url: '/desktopmodules/FYWorkoutDirectory/api/WorkoutDirectory/GetFiltersList'
+                url: '/desktopmodules/FYWorkoutDirectory/api/WorkoutDirectory/GetFiltersList?Culture=' + $('#hdn_tm_culture').val()
             });
         },
 
@@ -55,30 +58,8 @@
         }
     }
 });
-
-WDApp.factory("RESTInitialFac", function($resource) {
-    return $resource('/desktopmodules/FYWorkoutDirectory/api/WorkoutDirectory/GetStoreInitialItems', {
-
-    });
-    
-});
-WDApp.factory("RESTStoreItems", function ($resource) {
+angular.module('WDApp.RESTStoreItems', []).factory("RESTStoreItems", function ($resource) {
     return $resource('/desktopmodules/FYWorkoutDirectory/api/WorkoutDirectory/GetStoreItems',
-        {
-            LevelIDs: "@LevelIDs",
-        PlanTypeIDs: "@PlanTypeIDs",
-        ObjectiveIDs: "@ObjectiveIDs",
-        BodyParts: "@BodyParts"
-         , PlanName: "@PlanName"
-         , Isfree: "@FreeOrPaid"
-         , DirectoryTypes: "@CompleteOrDay"
-          , page: "@Page"
-            , minWeek: "@minWeek"
-            , maxWeek: "@maxWeek"
-
-        }
-    );
-   /* return $resource('/desktopmodules/FYWorkoutDirectory/api/WorkoutDirectory/GetStoreItems2/:Page',
         {
             LevelIDs: "@LevelIDs",
             PlanTypeIDs: "@PlanTypeIDs",
@@ -87,13 +68,23 @@ WDApp.factory("RESTStoreItems", function ($resource) {
          , PlanName: "@PlanName"
          , Isfree: "@FreeOrPaid"
          , DirectoryTypes: "@CompleteOrDay"
-          , Page: "@Page"
+          , page: "@Page"
+            , minWeek: "@minWeek"
+            , maxWeek: "@maxWeek"
+            , Culture: "@culture"
 
         }
-    );*/
+    );
+     
+});
+angular.module('WDApp.PurchaseItemsREST', []).factory("PurchaseItemsREST", function ($resource) {
+
+    return $resource('/DesktopModules/FYWorkoutDirectory/API/WorkoutDirectory/GetPurchaseItems');
 });
 
-WDApp.factory("WorkoutDetailsREST", function($resource) {
+ 
+
+angular.module('WDApp.WorkoutDetailsREST', []).factory("WorkoutDetailsREST", function ($resource) {
   
     return $resource('/DesktopModules/FYWorkoutPlan/API/ExercisePlan/GetWorkoutsListForStore', {
         planID: "@workoutID"
@@ -101,7 +92,7 @@ WDApp.factory("WorkoutDetailsREST", function($resource) {
     
 })
 
-WDApp.factory("OneDayWorkoutREST", function ($resource) {
+angular.module('WDApp.OneDayWorkoutREST', []).factory("OneDayWorkoutREST", function ($resource) {
 
     return $resource('/DesktopModules/FYWorkoutPlan/API/ExercisePlan/GetWorkoutModelForStore', {
         workoutID: "@workoutID"
@@ -110,17 +101,5 @@ WDApp.factory("OneDayWorkoutREST", function ($resource) {
 })
 
 
-WDApp.factory("PurchaseItemsREST", function ($resource) {
-    
-    return $resource('/DesktopModules/FYWorkoutDirectory/API/WorkoutDirectory/GetPurchaseItems');
-});
 
-//WDApp.factory("checkoutREST", function ($resource) {
-//    return $http.get{}('/DesktopModules/FYWorkoutDirectory/API/WorkoutDirectory/GenerateUserTocken', {
-
-//        totalAmount: "@totalAmount",
-//        Currency:"@Currency"
-
-//    })
-   
-//})
+ 

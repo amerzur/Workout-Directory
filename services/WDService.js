@@ -1,4 +1,5 @@
-﻿WDApp.service('workoutService', function ($rootScope ) {
+﻿angular.module('WDApp.Service', [])
+ .service('workoutService', function ($rootScope) {
     
     var workoutDetails = {};
     var storeItem = {};
@@ -40,9 +41,9 @@
 
         var d1 = dateFrom.split("/");
         var d2 = dateTo.split("/");
-        var startDate = new Date(d1[2], d1[0] - 1, d1[1]);  // -1 because months are from 0 to 11
+        var startDate = new Date(d1[2], d1[0] - 1, d1[1]);   
         var endDate = new Date(d2[2], d2[0] - 1, d2[1]); 
-       // var days=(7*week)-1
+    
         startDate.setDate(startDate.getDate() + (week - 1) * 7)
        var endWeekDate = new Date(startDate.getTime());
        endWeekDate.setDate(endWeekDate.getDate() + 7)
@@ -53,7 +54,7 @@
             var check = new Date(dc[2], dc[1] - 1, dc[0]);
             if (check >= startDate && check < endWeekDate)
             returnList.push(value);
-            /* do something for all key: value pairs */
+             
         });
  
         returnList = addDaystoWorkouts(returnList);
@@ -72,7 +73,7 @@
         angular.forEach(workoutlist, function (value, key) { 
             var dc = value.WorkoutDateOnly.split("/")
             var check = new Date(dc[2], dc[1] - 1, dc[0]);
-            if (check.valueOf() != firstday.valueOf()) //compare two dates to equal or not  
+            if (check.valueOf() != firstday.valueOf())  
             {
                 Daynum++;
                 firstday = check;
@@ -91,8 +92,7 @@
 
         var purchasedItems =  purchsedList.map(function (elem) {
             return elem.ProductID;
-        }).join(",");  //
-
+        }).join(",");  
         this.idsArray = purchasedItems.split(",");
 
         for (var i = 0; i < this.idsArray.length; i++) { this.idsArray[i] = parseInt(this.idsArray[i], 10); }
@@ -101,9 +101,11 @@
     }
 
 
-    var ManageWorkouts = function (workoutlist) { // to remove redundant prudects with same Prudect id and convert
-                                                // the price from string to int
-                                                   // to detirmin if the user buy any product before or not 
+    var ManageWorkouts = function (workoutlist) {
+
+        /*to remove redundant prudects with same Prudect id and convert
+         the price from string to int
+            to detirmin if the user buy any product before or not */
 
 
         
@@ -188,14 +190,7 @@
     var setPurchasedItems = function (items) {
         this.purchsedList = items;
     }
-    //var setUpdateStoreItem = function (item) {
-
-    //    updatedStoreItem = item;
-    //}
-    //var getUpdateStoreItem = function () {
-
-    //    return updatedStoreItem;
-    //}
+    
 
     return {
         createDaysworkoutList:createDaysworkoutList,
@@ -217,9 +212,7 @@
         getTocken: getTocken,
         getPurchasedItems: getPurchasedItems,
         setPurchasedItems: setPurchasedItems 
-        //setUpdateStoreItem: setUpdateStoreItem,
-        //getUpdateStoreItem: getUpdateStoreItem
-         
+        
 
 
      

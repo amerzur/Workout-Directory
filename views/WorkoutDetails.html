@@ -23,7 +23,7 @@
                             <div class="row">
                                 <div class="col-md-12">
 
-                                    <h1 class="details-header " id="listing_name">
+                                    <h1 class="col-sm-offset-1   " id="listing_name">
                                         <i class="glyphicon glyphicon-signal"></i>   {{WorkoutDetails.DisplayName}}
                                     </h1>
                                     <span ng-bind="WorkoutDetails.Description" class="col-sm-offset-1" style="    display: inline-block;"></span>
@@ -63,31 +63,32 @@
                     </div>
                     <div class="col-sm-4">
                         <div class="row">
-                            <a href="#" ng-click="backToList()" class="col-sm-5 col-sm-offset-1">
-                                <i class="fa fa-arrow-left fa-1x"></i>&nbsp;<span translate="back" class="pointer-curser">back</span>
+                            <a  ng-click="backToList()" class="col-sm-5 col-sm-offset-1">
+                                <i class="fa fa-arrow-left fa-1x"></i>&nbsp;<h1 translate="back" class="pointer-curser">back</h1>
                             </a>
                         </div>
-                        <!--<a name="details-price-box"></a>-->
+                        
                         <div class="details-price-box " ng-hide="details.isPurchased">
-                            <h4 class="screen-reader-only details-price">
+                            <h4 class=" details-price">
                              <span translate="price"></span> : &nbsp;{{WorkoutDetails.Price}}&nbsp;<i class="fa fa-dollar  "></i>
                             </h4>
 
 
-                            <div class="panel row">
+                            <div class="panel col-sm-12">
                                 <br />
-                                <div class="col-sm-12 ">
+                                <div class="  ">
                                     <!--<ngcart-addtocart id="{{WorkoutDetails.ProductID}}" name="{{WorkoutDetails.DisplayName}}" price="{{WorkoutDetails.Price}}">  </ngcart-addtocart>-->
-                                    <button class="checkout btn col-sm-5 col-sm-offset-1 " name="checkout" type="button" ng-click="addToCart(WorkoutDetails)"><span translate="addToCart"></span> </button>
-                                    <button class="checkout btn col-sm-2 col-sm-offset-1 " name="checkout" type="button" ng-click="checkout()" style=" width: 34%; ">
+                                    <button class="checkout btn col-sm-5 " name="checkout" type="button" ng-click="addToCart(WorkoutDetails)"><span translate="addToCart"></span> </button>
+                                    <button class="checkout btn col-sm-5 col-sm-offset-2 " name="checkout" type="button" ng-click="checkout()" >
                                         <span translate="buy"></span>
                                     </button>
-                                    <br /> <br /> 
-                                    <div class="row">
-                                        <label ng-show="showAddedToCart(WorkoutDetails.ProductID)" class=" col-sm-offset-2">
-                                            <span translate="itemInCart"></span>  <a ng-click=" removeItemById(WorkoutDetails.ProductID)" style="cursor: pointer;"><span translate="remove"></span> </a>
-                                        </label>
-                                    </div>
+                                    <br /> <br />
+                                   
+                                </div>
+                                <div class="row">
+                                    <span ng-show="showAddedToCart(WorkoutDetails.ProductID)" class=" ">
+                                        <span translate="itemInCart"></span>  <a ng-click=" removeItemById(WorkoutDetails.ProductID)" style="cursor: pointer;"><span translate="remove"></span> </a>
+                                    </span>
                                 </div>
 
                             </div>
@@ -97,32 +98,33 @@
                     </div>
                 </div>
                 <br />
-                <div class="row text-muted   ">
-                    <div class="col-sm-2 col-xs-4 col-sm-offset-1  " translate="Specification">
-                        <span translate="Specification"></span>
+                <div class="row">
+                    <div class="  text-muted col-sm-8  ">
+                        <div class="col-sm-3   col-sm-offset-1  " translate="Specification">
+                            <span translate="Specification"></span>
 
-                    </div>
-                    <div class="col-sm-4 col-xs-8 ">
-                        <span translate="duration"></span>:<strong> {{WorkoutDetails.PlanDurationInWeek}} <span translate="weeks"></span></strong>
-                        <br /><br />
-                        <span translate="objectives"></span>:<strong>{{WorkoutDetails.Objective}}</strong>
-                    </div>
-                    <div class="col-sm-4 col-xs-8 ">
-                        <span translate="planType"></span> : <strong ng-bind="planTypeString"></strong>
-                        <br /><br />
-                        <span translate="intensityLevel"></span>
-                               :<strong ng-bind="levelString"></strong>
+                        </div>
+                        <div class="col-sm-4  ">
+                            <span translate="duration"></span>:<strong> {{WorkoutDetails.PlanDurationInWeek}} <span translate="weeks"></span></strong>
+                            <br /><br />
+                            <span translate="objectives"></span>:<strong>{{WorkoutDetails.Objective}}</strong>
+                        </div>
+                        <div class="col-sm-4   ">
+                            <span translate="planType"></span> : <strong ng-bind="planTypeString"></strong>
+                            <br /><br />
+                            <span translate="intensityLevel"></span>
+                            :<strong ng-bind="levelString"></strong>
 
+                        </div>
                     </div>
-                </div> 
-
+                </div>
             </div>
         </div>
 
         <div ui-view  >
 
         </div>
-        <div class="col-sm-offset-1" id="ContentTab">
+        <div class=" " id="ContentTab">
             <div class="tab-pane active" id="reviews">
                 <div class="fb-comments" data-href="{{FacebookUrl}}" data-width="830" data-numposts="15" data-colorscheme="light">
             </div>

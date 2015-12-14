@@ -1,51 +1,51 @@
-﻿var WDApp = angular.module("WDApp", ["ui.router", "pascalprecht.translate", "mgcrea.ngStrap", "ngDialog",
-    "ngCart", "ui.bootstrap", "ngResource", "ui-rangeSlider", "cgBusy", "seo", "angularFileUpload"]);
+﻿var BaseUrl = $('#hdn_base_url').val(); 
+angular.module("WDApp", ["ui.router", "WDApp.home", "WDApp.CompletePlans", "WDApp.Factory",
+    "WDApp.Service", "WDApp.RESTStoreItems", "WDApp.PurchaseItemsREST","WDApp.WorkoutDetailsREST","WDApp.CartDetails",
+    , "WDApp.OneDayWorkoutREST", "WDApp.fancybox", "WDApp.ngThumb", "WDApp.WorkoutDetails", "WDApp.WorkoutDetailsList",
+    "WDApp.Billing", "WDApp.paymentStatus", "WDApp.PurchaseItems", "WDApp.ModalInstance","WDApp.addWorkout",
+    "pascalprecht.translate", "mgcrea.ngStrap", "ngDialog",
+  "ngCart", "ui.bootstrap", "ngResource", "ui-rangeSlider", "cgBusy", "seo", "angularFileUpload"])
 
 
-WDApp.config(function ($stateProvider, $urlRouterProvider, $translateProvider, $locationProvider) {
+ .config(function ($stateProvider, $urlRouterProvider, $translateProvider, $locationProvider) {
     $stateProvider
         .state("Home", {
-             url: "/Home",
-           templateUrl: "DesktopModules/FYWorkoutDirectory/app/views/Home.html"
+            url: "/Home",
+            templateUrl: "DesktopModules/FYWorkoutDirectory/app/views/Home.html"
 
-         })
+        })
         .state("CompletePlans", {
             url: "/CompletePlans",
-            templateUrl: "DesktopModules/FYWorkoutDirectory/app/views/CompletePlans.html"
+            templateUrl:  "DesktopModules/FYWorkoutDirectory/app/views/CompletePlans.html"
             
         }) 
      .state('WorkoutDetails', {
          
-         url: '/WorkoutDetails/:workoutID/:planTypeID ',
+         url: '/WorkoutDetails/:workoutID/:planTypeID',
          templateUrl: "DesktopModules/FYWorkoutDirectory/app/views/WorkoutDetails.html",
          cache:true
          
      })
          .state('WorkoutDetails.mian', {
 
-             url: '/workoutMain ',
-             templateUrl: "DesktopModules/FYWorkoutDirectory/app/views/WorkoutDetails-main.html" 
+             url: '/workoutMain',
+             templateUrl: "DesktopModules/FYWorkoutDirectory/app/views/WorkoutDetails-main.html"
 
          })
         .state('WorkoutDetails.list', {
 
-            url: '/WorkoutDetailsList/:weekID ',
+            url: '/WorkoutDetailsList/:weekID',
             templateUrl: "DesktopModules/FYWorkoutDirectory/app/views/WorkoutDetailsList.html"
 
         })
-    //.state('WorkoutDetailsList', {
-    //    url: '/WorkoutDetailsList/:weekID ',
-    //    templateUrl: "DesktopModules/FYWorkoutDirectory/app/views/WorkoutDetailsList.html"
-         
-
-    //})
+    
     .state('cartDetails', {
         url: '/cartDetails',
-        templateUrl:"DesktopModules/FYWorkoutDirectory/app/views/CartDetails.html"
+        templateUrl: "DesktopModules/FYWorkoutDirectory/app/views/CartDetails.html"
     })
     .state('billing', {
         url: '/billing',
-        templateUrl:"DesktopModules/FYWorkoutDirectory/app/views/BillingForm.html"
+        templateUrl: "DesktopModules/FYWorkoutDirectory/app/views/BillingForm.html"
     })
     .state('PaymentStatus', {
         url: '/paymentStatus/:Token',
@@ -53,17 +53,16 @@ WDApp.config(function ($stateProvider, $urlRouterProvider, $translateProvider, $
     })
     .state('purchaseItems', {
         url: '/purchaseItems',
-        templateUrl: "DesktopModules/FYWorkoutDirectory/app/views/PurchaseItems.html"
+        templateUrl:  "DesktopModules/FYWorkoutDirectory/app/views/PurchaseItems.html"
     })
     ;
 
-    // catch all route
-    // send users to the transformMe page 
+   
     $urlRouterProvider.otherwise("/Home");
      
      
 
-    //translation
+    
     $translateProvider.translations("en-US", {
         home: "Home",
         back:"BACK TO LIST",
@@ -144,7 +143,24 @@ WDApp.config(function ($stateProvider, $urlRouterProvider, $translateProvider, $
         previous: "Previous",
         next: "Next",
         lastPage: "Last",
-        firstPage:"First"
+        firstPage: "First",
+        video: "Product Video",
+        productImage: "Product Image",
+        size: "Size",
+        progress: "Progress",
+        status: "Status",
+        workoutPlan: "Workout Plan",
+        workout:"Workout",
+        save: "Save",
+        cancel: "Cancel",
+        queueProgress: "Queue progress",
+        modalMustComplete: "you must complete the requierd fileds before upload the image",
+        uploadAll: "Upload All",
+        cancelAll: "Cancel All",
+        removeAll: "Remove All",
+        modalSelectWorkout: " Workout Name /Creation Date / User Name ",
+        distance: "Distance",
+        youHaveToBuy: "you have to Buy the Plan to see The Details ! ....  "
 
 
     });
@@ -163,7 +179,7 @@ WDApp.config(function ($stateProvider, $urlRouterProvider, $translateProvider, $
         cardView: " بطاقات",
         listView: "لائحة",
         chooseWorkout: "اختر تمرين",
-        addToCart: "(اضف لسلة الشراء)",
+        addToCart: "اضف لسلة الشراء",
         buy: "شراء",
         name: "الاسم",
         price: "السعر",
@@ -228,18 +244,33 @@ WDApp.config(function ($stateProvider, $urlRouterProvider, $translateProvider, $
         previous: "السابق",
         next: "التالي",
         lastPage:"الصفحة الاخيرة",
-        firstPage:"الصفحة الاولى"
-
+        firstPage: "الصفحة الاولى",
+        video: "الفيديو",
+        productImage: "صورة المنتج",
+        size: "الحجم",
+        progress: "تقدم",
+        status: "الحالة",
+        workoutPlan: "خطة تمارين",
+        workout: "تمرين ليوم واحد",
+        save: "حفظ",
+        cancel: "الغاء",
+        queueProgress: "تقدم التحميل",
+        modalMustComplete:"الرجاء اكمال الحقول الضرورية لرفع الصورة",
+        uploadAll: "رفع",
+        cancelAll: "الغاء",
+        removeAll: "ازالة",
+        modalSelectWorkout: " اسم المترين /تاريخ الانشاء/ اسم المستخدم ",
+        distance: "المسافة",
+        youHaveToBuy:"عليك ان تشتري هذا التمرين لترى كامل الجدول..... ! "
 
     });
-   $translateProvider.preferredLanguage($("#hdn_tm_culture").val());
+    $translateProvider.preferredLanguage($("#hdn_tm_culture").val());
       
    
-});
-WDApp.config(function ($locationProvider, $httpProvider)
+})
+ .config(function ($locationProvider, $httpProvider)
 {
-    //Add Prefix to the URL Hash for Search Engines
-    $locationProvider.hashPrefix('!');
+     $locationProvider.hashPrefix('!');
 
     var $http,
               interceptor = ['$q', '$injector', function ($q, $injector) {
@@ -255,8 +286,7 @@ WDApp.config(function ($locationProvider, $httpProvider)
                               {
                                   $rootScope.htmlReady();
                               }
-                          }, 700);//an 0.7 seconds safety interval, if there are no requests for 0.7 seconds, it means that the app is through rendering
-                      }
+                          }, 700);  }
                       return response;
                   }
 
@@ -274,9 +304,9 @@ WDApp.config(function ($locationProvider, $httpProvider)
 
     $httpProvider.interceptors.push(interceptor);
 }
-);
+)
 
-WDApp.run(function ($rootScope) {
+ .run(function ($rootScope) {
     $('head').append('<meta name="fragment" content="!" />');
     $rootScope.Level = [{ text: "Beginner",textAR:"مبتدأ", ID: "1" }, { text: "Intermediate",textAR:"متوسط", ID: "2" }, { text: "Advance",textAR:"متقدم", ID: "3" }];
     $rootScope.PlanTypes = [{ text: "Body Weight", textAR: "وزن الجسم", ID: "1" }, { text: "Machines and Free Wieght", textAR: "الات و بدون وزن", ID: "2" }, { text: "Machines Only ", textAR: "فقط الات", ID: "3" }, { text: "Cardio Only", textAR: "فقط كارديو", ID: "4" }];
@@ -285,5 +315,9 @@ WDApp.run(function ($rootScope) {
     $rootScope.currentLanguage = function () { return $("#hdn_tm_culture").val(); }
     $rootScope.UserID = function () { return $("#hdn_tm_usrid").val(); }
     $rootScope.FacebookUrl = function () { return $("#hdn_tm_Url").val(); }
-})
+    $rootScope.canEdit = function () { return $("#hdn_tm_can").val(); }
+    $rootScope.BaseUrl = function () { return BaseUrl;}
+});
+
+ 
 

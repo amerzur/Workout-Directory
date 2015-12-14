@@ -1,4 +1,5 @@
-﻿WDApp.controller("CartDetailsController", ["$scope", "$rootScope", "$state", "ngCart", "workoutService", "$http","$window",
+﻿angular.module('WDApp.CartDetails', [])
+.controller("CartDetailsController", ["$scope", "$rootScope", "$state", "ngCart", "workoutService", "$http", "$window",
 function ($scope, $rootScope, $state, ngCart, workoutService, $http, $window) {
   
     $window.document.title = "Fitnessyard Cart Details";
@@ -35,7 +36,7 @@ function ($scope, $rootScope, $state, ngCart, workoutService, $http, $window) {
                     $scope.Token = data;
                     workoutService.setTocken($scope.Token);
                     $.unblockUI();
-                    //$scope.cleanCart();
+                    
                     $state.go('billing');
 
         }); 

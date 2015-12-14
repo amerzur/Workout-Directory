@@ -1,4 +1,6 @@
-﻿WDApp.controller('PurchaseItemsController', ["$scope", "PurchaseItemsREST", "workoutService", "$state", "$modal", "$location","$window",
+﻿ 
+angular.module('WDApp.PurchaseItems', [])
+.controller('PurchaseItemsController', ["$scope", "PurchaseItemsREST", "workoutService", "$state", "$modal", "$location", "$window",
 
     function ($scope, PurchaseItemsREST, workoutService, $state, $modal, $location, $window) {
         $window.document.title = "FitnessYard.com Cart Details";
@@ -39,7 +41,8 @@
 
     }]);
 
-WDApp.controller('ModalInstanceCtrl',["$scope","$modalInstance","item", "$http",
+angular.module('WDApp.ModalInstance', [])
+.controller('ModalInstanceCtrl', ["$scope", "$modalInstance", "item", "$http",
     
     function ($scope, $modalInstance, item ,$http ) {
     

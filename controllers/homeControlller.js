@@ -1,16 +1,15 @@
-﻿WDApp.controller("homeControlller", ["$state", "$rootScope", "$scope", "WDFactory",
+﻿
+angular.module('WDApp.home', [])
+
+.controller("homeControlller", ["$state", "$rootScope", "$scope", "WDFactory",
 
     "workoutService", "RESTStoreItems", "ngCart", "PurchaseItemsREST", "$window",
 function ($state, $rootScope, $scope, WDFactory, workoutService, RESTStoreItems, ngCart, PurchaseItemsREST,$window) {
 
        
-       // $window.document.title = "fitnessYard.com w";
-      
+       
     $scope.totalItemsinCart = ngCart.getTotalItems();
-    //$scope.$watch('ngCart.getTotalItems()', function (newValue) {
-    
-    //    $scope.totalItemsinCart = newValue;
-    //})
+     
     $scope.totalCost = ngCart.totalCost();
 
         $scope.sliderOptions = {
@@ -19,8 +18,7 @@ function ($state, $rootScope, $scope, WDFactory, workoutService, RESTStoreItems,
 
         };
         $scope.clearFitersShow = false;
-        // initilaze of filters properties 
-        //////////// 
+        
    
         $scope.Criteria = workoutService.getCriteria() || {
             LevelIDs: ""
@@ -54,13 +52,11 @@ function ($state, $rootScope, $scope, WDFactory, workoutService, RESTStoreItems,
 
 
         }
-        // finish initilazation of filters 
-        /////////////////
+        
 
 
 
-        //get reviouse user purchased Item to not enable him purchase again 
-        /////////////////////////////////////////////////
+       
 
         $scope.PurchaseItems = PurchaseItemsREST.query();
         $scope.PurchaseItems.$promise.then(function (result) {
@@ -72,8 +68,7 @@ $scope.PurchaseItems = result;
             }
             
         });
-        ///////////////////////////////////////////////////////////////
-        /////////////////////////////////////////////////////////
+         
 
         
         $scope.GetFiltersList = function () {
@@ -89,33 +84,28 @@ $scope.PurchaseItems = result;
                 $scope.FreeOrPaid = $rootScope.FreeOrPaid;
                 
                 
-               // $state.go("CompletePlans");
+               
             })
               .error(function (data, status, headers, config) {
-                  // called asynchronously if an error occurs
-                  // or server returns response with an error status.
+ 
               }).then(function () {
 
 
               });
         }
 
-        ////////////////////////
-        //toggle check box functions 
-        //////////////////////////////////
+       
 
         $scope.toggleSelectedPlanType = function toggleSelectedPlanType(plantype) {
 
             var idx = $scope.PlanTypesSelected.indexOf(plantype);
 
-            // is currently selected
-            if (idx > -1)
+             if (idx > -1)
             {
                 $scope.PlanTypesSelected.splice(idx, 1);
             }
 
-                // is newly selected
-            else
+             else
             {
                 $scope.PlanTypesSelected.push(plantype);
             }
@@ -129,14 +119,12 @@ $scope.PurchaseItems = result;
 
             var idx = $scope.ObjectiveSelected.indexOf(Objective);
 
-            // is currently selected
-            if (idx > -1)
+             if (idx > -1)
             {
                 $scope.ObjectiveSelected.splice(idx, 1);
             }
 
-                // is newly selected
-            else
+             else
             {
                 $scope.ObjectiveSelected.push(Objective);
             }
@@ -150,13 +138,13 @@ $scope.PurchaseItems = result;
 
             var idx = $scope.BodyPartsSelected.indexOf(BodyPart);
 
-            // is currently selected
+          
             if (idx > -1)
             {
                 $scope.BodyPartsSelected.splice(idx, 1);
             }
 
-                // is newly selected
+                 
             else
             {
                 $scope.BodyPartsSelected.push(BodyPart);
@@ -171,20 +159,20 @@ $scope.PurchaseItems = result;
 
             var idx = $scope.FreeOrPaidSelected.indexOf(item);
 
-            // is currently selected
+         
             if (idx > -1)
             {
                 $scope.FreeOrPaidSelected.splice(idx, 1);
             }
 
-                // is newly selected
+              
             else
             {
                 $scope.FreeOrPaidSelected.push(item);
             }
             if ($scope.FreeOrPaidSelected.length === 2)
             {
-                // $scope.FreeOrPaidSelected = [];
+                
                 $scope.FreeOrPaidSelected.splice(0, 1);
             }
             $scope.Criteria.FreeOrPaid = $scope.FreeOrPaidSelected.map(function (elem) {
@@ -197,13 +185,11 @@ $scope.PurchaseItems = result;
 
             var idx = $scope.CompleteOrDaySelected.indexOf(item);
 
-            // is currently selected
-            if (idx > -1)
+             if (idx > -1)
             {
                 $scope.CompleteOrDaySelected.splice(idx, 1);
             }
-                // is newly selected
-            else
+             else
             {
                 $scope.CompleteOrDaySelected.push(item);
             }
@@ -223,8 +209,7 @@ $scope.PurchaseItems = result;
             {
                 $scope.LevelSelected.splice(idx, 1);
             }
-                // is newly selected
-            else
+             else
             {
                 $scope.LevelSelected.push(Level);
             }
@@ -234,9 +219,7 @@ $scope.PurchaseItems = result;
             }).join(",");
             $scope.setToFirstPage();
         };
-        ///////////////////////////////////////////////
-        //end toggle functions //////////////////////
-
+        
         $scope.setToFirstPage = function () {
 
             $scope.Pagination.CurrentPage = 1;
@@ -248,14 +231,15 @@ $scope.PurchaseItems = result;
                 $scope.SendStoreItemRequest();
             
         };
-        $scope.SendStoreItemRequest = function () { 
-          //$.blockUI({ message: '<h3>Loading Store Items...</h3>' });
-            $scope.storePromise = RESTStoreItems.get({
+        $scope.SendStoreItemRequest = function () {
+            debugger;
+             $scope.storePromise = RESTStoreItems.get({
                 LevelIDs: $scope.Criteria.LevelIDs, PlanTypeIDs: $scope.Criteria.PlanTypeIDs
                 , ObjectiveIDs: $scope.Criteria.ObjectiveIDs, BodyParts: $scope.Criteria.BodyParts
                 , PlanName: $scope.Criteria.PlanName, Isfree: $scope.Criteria.FreeOrPaid
                 , DirectoryTypes: $scope.Criteria.CompleteOrDay, page: $scope.Criteria.Page
-                ,minWeek:$scope.Criteria.minWeek,maxWeek:$scope.Criteria.maxWeek
+                , minWeek: $scope.Criteria.minWeek, maxWeek: $scope.Criteria.maxWeek
+, culture: $('#hdn_tm_culture').val()
 
             }, function (respond) {
              
@@ -264,8 +248,7 @@ $scope.PurchaseItems = result;
                
                 workoutService.addTotalItems(respond.TotalCount);
                $scope.CarObj= ngCart.getCart()
-             ///  $.unblockUI();
-            });
+              });
 
         }
         $scope.getFilterText = function (item) {
@@ -278,7 +261,9 @@ $scope.PurchaseItems = result;
                 return item.textAR;
             }
         }
-
+        $scope.canEdit = function () {
+            return $rootScope.canEdit()==="1";
+        }
       
         $scope.clearFilters = function () {
             

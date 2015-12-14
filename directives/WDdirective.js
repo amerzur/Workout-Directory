@@ -1,21 +1,11 @@
-﻿WDApp.directive('fancybox', ['$compile', '$http',
+﻿angular.module('WDApp.fancybox', [])
+.directive('fancybox', ['$compile', '$http',
   function ($compile, $http) {
       return function ($scope) {
 
           $scope.openFancybox = function (url) {
            
-            //  $http.get(url).then(function (response) {
-                  //if (response.status == 200)
-                  //{
-
-                      //var template = angular.element(response.data);
-                      //var compiledTemplate = $compile(template);
-
-
-                      //$.fancybox.open({
-                      //    content: template,
-                      //    type: 'html'
-              //});
+            
               var str1 = "https://www.youtube.com/watch?v=";
               url = str1.concat(url)
                       $.fancybox({
@@ -33,9 +23,7 @@
                           }
                       });
 
-                     // compiledTemplate($scope);
-                  //}
-              //});
+                    
           }
 
       };
@@ -46,7 +34,7 @@
 
 
 
-WDApp. directive('ngThumb', ['$window', function($window) {
+angular.module('WDApp.ngThumb', []).directive('ngThumb', ['$window', function ($window) {
     var helper = {
         support: !!($window.FileReader && $window.CanvasRenderingContext2D),
         isFile: function(item) {
@@ -92,13 +80,4 @@ WDApp. directive('ngThumb', ['$window', function($window) {
 }]);
 
 
-//WDApp.directive('parseStyle', function($interpolate) {
-//    return function(scope, elem) {
-//        var exp = $interpolate(elem.html()),
-//            watchFunc = function () { return exp(scope); };
-        
-//        scope.$watch(watchFunc, function (html) {
-//            elem.html(html);
-//        });
-//    };
-//});
+ 

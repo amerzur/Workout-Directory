@@ -1,12 +1,10 @@
-﻿WDApp.controller("WorkoutDetailsController", ["$scope", "$rootScope", "$state", "$stateParams",
-    "WorkoutDetailsREST", "OneDayWorkoutREST", "PurchaseItemsREST", "workoutService", "ngCart", "$window", "$location", "WDFactory",
+﻿angular.module('WDApp.WorkoutDetails', [])
+.controller("WorkoutDetailsController", ["$scope", "$rootScope", "$state", "$stateParams",
+    "WorkoutDetailsREST", "OneDayWorkoutREST", "PurchaseItemsREST", "workoutService", "ngCart", "$window", "$location", "WDFactory","$timeout",
 function ($scope, $rootScope, $state, $stateParams, WorkoutDetailsREST, OneDayWorkoutREST,
-    PurchaseItemsREST, workoutService, ngCart, $window, $location, WDFactory) {
+    PurchaseItemsREST, workoutService, ngCart, $window, $location, WDFactory, $timeout) {
 
-    //scroll to photo at open th e page 
-
-
-    /// change the window title 
+    
     $window.document.title = "Fitnessyard Workout Details";
 
     $scope.WeekList = [];
@@ -186,8 +184,7 @@ function ($scope, $rootScope, $state, $stateParams, WorkoutDetailsREST, OneDayWo
 
     $scope.getStyle = function (respond) {
       
-            //if (respond.Price != 0)
-            //{
+           
                 WDFactory.checkifPurchased({ productID: respond.ProductID })
 
                .success(function (checkPurchasedResponce) {
@@ -209,24 +206,10 @@ function ($scope, $rootScope, $state, $stateParams, WorkoutDetailsREST, OneDayWo
                            opacity: $scope.style.opacity
                        };
                    };
-                   // set the details after request the priceing . 
-                   $scope.assignRespondToWorkoutDetails(respond); 
+                    $scope.assignRespondToWorkoutDetails(respond); 
 
                });
-            //} else
-            //{
-            //  $scope.style.opacity = "1";
-            //    $scope.style.cursor = "pointer";
-            //    respond.isPurchased = true;
-            //    $scope.details.isFree = true;
-            //    $scope.weeksStyle = function () {
-            //        return {
-            //            cursor: $scope.style.cursor,
-            //            opacity: $scope.style.opacity
-            //        };
-            //    };
-            //    $scope.assignRespondToWorkoutDetails(respond);
-            //}
+          
          
     }
 
@@ -264,8 +247,7 @@ function ($scope, $rootScope, $state, $stateParams, WorkoutDetailsREST, OneDayWo
         });
     }
 
-    /// for priceing list 
-    $scope.addToCart = function (item) {
+     $scope.addToCart = function (item) {
 
         ngCart.addItem(item.ProductID, item.DisplayName, item.Price)
     };
@@ -301,8 +283,11 @@ function ($scope, $rootScope, $state, $stateParams, WorkoutDetailsREST, OneDayWo
            , maxWeek: $scope.sliderOptions.max
         };
         workoutService.setCriteria(newCriteria);
-        $state.go("Home");
+       
+             $state.go("Home");
+         
     }
+   
 }]
 );
 

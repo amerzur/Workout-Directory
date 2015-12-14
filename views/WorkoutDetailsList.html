@@ -20,8 +20,8 @@
                    
                     <div ng-repeat=" item in  WorkoutDetails.Workouts  " ng-class="$first||priceClass">
                         <div class="b-workout-program-day-title">
-                           <label translate="day"></label>   {{ ::item.DayNum}}: &nbsp;<label translate="workoutnum"></label>   {{$index+1}}
-                            <a ng-hide="StoreItem.isPurchased  ||StoreItem.Price==0"><label class="buy-plan-alert">you have to Buy the Plan to see The Details !</label></a>
+                           <label translate="day"></label>   {{ ::item.DayNum}}: &nbsp;<label translate="workoutnum"></label>   {{$index+1}} 
+                            <a ng-hide="StoreItem.isPurchased  ||StoreItem.Price==0"><label class="buy-plan-alert" translate="youHaveToBuy"></label> </a>
                         </div> 
                         <div ng-show="WeekNum!=-1||StoreItem.isPurchased  ||StoreItem.Price==0 ">
                             <!-- if it is a one day workout , don't show the details  -->
@@ -45,16 +45,16 @@
 
                                         <div class="b-workout-part--instructions">
                                             <div class="b-workout-part--weight--item workouts-sets">
-                                                <!--{{Weight.NumberOfSets}}-->   <span class="b-workout-part--instructions--suf" translate="sets"> </span>
+                                                <!--{{Weight.NumberOfSets}}-->   <h1 class="b-workout-part--instructions--suf" translate="sets"> </h1>
                                             </div>
                                             <div class="b-workout-part--weight--item workouts-reps">
-                                                <span class="b-workout-part--instructions--suf" translate="reps"> </span>
+                                                <h1 class="b-workout-part--instructions--suf" translate="reps"> </h1>
                                             </div>
                                             <div class="b-workout-part--weight--item workouts-rest">
-                                                <!--{{Weight.RestTime}} sec-->  <span class="b-workout-part--instructions--suf" translate="rest"> </span>
+                                                <!--{{Weight.RestTime}} sec-->  <h1 class="b-workout-part--instructions--suf" translate="rest"> </h1>
                                             </div>
                                             <div class="b-workout-part--weight--item workouts-rest">
-                                                <span class="b-workout-part--instructions--suf" translate="weight">weight </span>
+                                                <h1 class="b-workout-part--instructions--suf" translate="weight">weight </h1>
                                             </div>
                                         </div>
 
@@ -104,13 +104,13 @@
 
                                                 <div class="b-workout-part--instructions">
                                                     <div class="b-workout-part--instructions--item workouts-sets">
-                                                     <span class="b-workout-part--instructions--suf" translate="sets">sets</span>    {{circuit.NumberOfSets}}  
+                                                     <h1 class="b-workout-part--instructions--suf" translate="sets">sets</h1>    {{circuit.NumberOfSets}}  
                                                     </div>
                                                     <div class="b-workout-part--instructions--item workouts-reps">
-                                                      <span class="b-workout-part--instructions--suf" translate="reps"> </span>  {{circuitSet.WeightExercise1.WeightSets.length}} sets   
+                                                      <h1 class="b-workout-part--instructions--suf" translate="reps"> </h1>  {{circuitSet.WeightExercise1.WeightSets.length}} sets   
                                                     </div>
                                                     <div class="b-workout-part--instructions--item workouts-rest">
-                                                        <span class="b-workout-part--instructions--suf" translate="rest"> </span> {{circuit.RestBetweenCircuit}} sec 
+                                                        <h1 class="b-workout-part--instructions--suf" translate="rest"> </h1> {{circuit.RestBetweenCircuit}} sec 
                                                     </div>
                                                 </div>
                                                 <div class="b-workout-part--editorial-details">
@@ -133,13 +133,13 @@
 
                                                 <div class="b-workout-part--instructions">
                                                     <div class="b-workout-part--instructions--item workouts-sets">
-                                                      <span class="b-workout-part--instructions--suf" translate="sets">sets</span>    {{circuit.NumberOfSets}} 
+                                                      <h1 class="b-workout-part--instructions--suf" translate="sets">sets</h1>    {{circuit.NumberOfSets}} 
                                                     </div>
                                                     <div class="b-workout-part--instructions--item workouts-reps">
-                                                        <span class="b-workout-part--instructions--suf" translate="reps">reps</span> {{circuitSet.WeightExercise2.WeightSets.length}} sets  
+                                                        <h1 class="b-workout-part--instructions--suf" translate="reps">reps</h1> {{circuitSet.WeightExercise2.WeightSets.length}} sets  
                                                     </div>
                                                     <div class="b-workout-part--instructions--item workouts-rest">
-                                                       <span class="b-workout-part--instructions--suf" translate="rest">rest</span>   {{circuit.RestBetweenCircuit}} sec
+                                                       <h1 class="b-workout-part--instructions--suf" translate="rest">rest</h1>   {{circuit.RestBetweenCircuit}} sec
                                                     </div>
                                                 </div>
                                                 <div class="b-workout-part--editorial-details">
@@ -162,13 +162,13 @@
 
                                                 <div class="b-workout-part--instructions">
                                                     <div class="b-workout-part--instructions--item workouts-sets">
-                                                         <span class="b-workout-part--instructions--suf">sets</span>  {{circuit.NumberOfSets}}
+                                                         <h1 class="b-workout-part--instructions--suf">sets</h1>  {{circuit.NumberOfSets}}
                                                     </div>
                                                     <div class="b-workout-part--instructions--item workouts-reps">
-                                                         <span class="b-workout-part--instructions--suf">reps</span>  {{circuitSet.WeightExercise3.WeightSets.length}} sets
+                                                         <h1 class="b-workout-part--instructions--suf">reps</h1>  {{circuitSet.WeightExercise3.WeightSets.length}} sets
                                                     </div>
                                                     <div class="b-workout-part--instructions--item workouts-rest">
-                                           <span class="b-workout-part--instructions--suf">rest</span>   {{circuit.RestBetweenCircuit}} sec 
+                                           <h1 class="b-workout-part--instructions--suf">rest</h1>   {{circuit.RestBetweenCircuit}} sec 
                                                     </div>
                                                 </div>
                                                 <div class="b-workout-part--editorial-details">
@@ -191,13 +191,13 @@
 
                                                 <div class="b-workout-part--instructions">
                                                     <div class="b-workout-part--instructions--item workouts-sets">
-                                                      <span class="b-workout-part--instructions--suf">sets</span>    {{circuit.NumberOfSets}} 
+                                                      <h1 class="b-workout-part--instructions--suf">sets</h1>    {{circuit.NumberOfSets}} 
                                                     </div>
                                                     <div class="b-workout-part--instructions--item workouts-reps">
-                                                        <span class="b-workout-part--instructions--suf">reps</span>  {{circuitSet.WeightExercise4.WeightSets.length}} sets 
+                                                        <h1 class="b-workout-part--instructions--suf">reps</h1>  {{circuitSet.WeightExercise4.WeightSets.length}} sets 
                                                     </div>
                                                     <div class="b-workout-part--instructions--item workouts-rest">
-                                                        <span class="b-workout-part--instructions--suf">rest</span> {{circuit.RestBetweenCircuit}} sec 
+                                                        <h1 class="b-workout-part--instructions--suf">rest</h1> {{circuit.RestBetweenCircuit}} sec 
                                                     </div>
                                                 </div>
                                                 <div class="b-workout-part--editorial-details">
@@ -219,13 +219,13 @@
 
                                                 <div class="b-workout-part--instructions">
                                                     <div class="b-workout-part--instructions--item workouts-sets">
-                                                        <span class="b-workout-part--instructions--suf">sets</span>  {{circuit.NumberOfSets}} 
+                                                        <h1 class="b-workout-part--instructions--suf">sets</h1>  {{circuit.NumberOfSets}} 
                                                     </div>
                                                     <div class="b-workout-part--instructions--item workouts-reps">
-                                                           <span class="b-workout-part--instructions--suf">reps</span>{{circuitSet.WeightExercise5.WeightSets.length}} sets
+                                                           <h1 class="b-workout-part--instructions--suf">reps</h1>{{circuitSet.WeightExercise5.WeightSets.length}} sets
                                                     </div>
                                                     <div class="b-workout-part--instructions--item workouts-rest">
-                                                         <span class="b-workout-part--instructions--suf">rest</span> {{circuit.RestBetweenCircuit}} sec
+                                                         <h1 class="b-workout-part--instructions--suf">rest</h1> {{circuit.RestBetweenCircuit}} sec
                                                     </div>
                                                 </div>
                                                 <div class="b-workout-part--editorial-details">
@@ -253,13 +253,13 @@
 
                                         <div class="b-workout-part--instructions">
                                             <div class="b-workout-part--instructions--item workouts-sets">
-                                                 <span class="b-workout-part--instructions--suf">time</span> {{cardio.EstimatedTime}} 
+                                                <h1 class="b-workout-part--instructions--suf" translate="distance"> </h1> {{cardio.Distance}} 
                                             </div>
                                             <div class="b-workout-part--instructions--item workouts-reps">
-                                                    <span class="b-workout-part--instructions--suf">Duration</span>{{cardio.Duration}} 
+                                                    <h1 class="b-workout-part--instructions--suf" translate="duration">Duration</h1>{{cardio.Duration}} 
                                             </div>
                                             <div class="b-workout-part--instructions--item workouts-rest">
-                                               <span class="b-workout-part--instructions--suf">rest</span>   {{cardio.RestTime}} sec
+                                               <h1 class="b-workout-part--instructions--suf"translate="rest">rest</h1>   {{cardio.RestTime}} <span translate="sec"></span>
                                             </div>
                                         </div>
                                         <div class="b-workout-part--editorial-details">
@@ -286,13 +286,13 @@
 
                                             <div class="b-workout-part--instructions">
                                                 <div class="b-workout-part--instructions--item workouts-sets">
-                                                   <span class="b-workout-part--instructions--suf" translate="time">time</span>    {{hit.WarmupDuration}}
+                                                   <h1 class="b-workout-part--instructions--suf" translate="time">time</h1>    {{hit.WarmupDuration}}
                                                 </div>
                                                 <div class="b-workout-part--instructions--item workouts-reps">
-                                                       <span class="b-workout-part--instructions--suf" translate="reps">reps</span>  {{hit.NumberOfRep}}
+                                                       <h1 class="b-workout-part--instructions--suf" translate="reps">reps</h1>  {{hit.NumberOfRep}}
                                                 </div>
                                                 <div class="b-workout-part--instructions--item workouts-rest">
-                                                   <span class="b-workout-part--instructions--suf" translate="rest">rest</span>   0 sec
+                                                   <h1 class="b-workout-part--instructions--suf" translate="rest">rest</h1>   0 sec
                                                 </div>
                                             </div>
                                             <div class="b-workout-part--editorial-details">
@@ -314,13 +314,13 @@
 
                                             <div class="b-workout-part--instructions">
                                                 <div class="b-workout-part--instructions--item workouts-sets">
-                                                   <span class="b-workout-part--instructions--suf" translate="time">time</span>  {{hit.LowDuration}}  
+                                                   <h1 class="b-workout-part--instructions--suf" translate="time">time</h1>  {{hit.LowDuration}}  
                                                 </div>
                                                 <div class="b-workout-part--instructions--item workouts-reps">
-                                                   <span class="b-workout-part--instructions--suf" translate="reps">reps</span>     {{hit.NumberOfRep}} 
+                                                   <h1 class="b-workout-part--instructions--suf" translate="reps">reps</h1>     {{hit.NumberOfRep}} 
                                                 </div>
                                                 <div class="b-workout-part--instructions--item workouts-rest">
-                                                     <span class="b-workout-part--instructions--suf" translate="rest">rest</span> 0 sec
+                                                     <h1 class="b-workout-part--instructions--suf" translate="rest">rest</h1> 0 sec
                                                 </div>
                                             </div>
                                             <div class="b-workout-part--editorial-details">
@@ -343,13 +343,13 @@
 
                                             <div class="b-workout-part--instructions">
                                                 <div class="b-workout-part--instructions--item workouts-sets">
-                                                  <span class="b-workout-part--instructions--suf" translate="time">time</span>   {{hit.HighDuration}}  
+                                                  <h1 class="b-workout-part--instructions--suf" translate="time">time</h1>   {{hit.HighDuration}}  
                                                 </div>
                                                 <div class="b-workout-part--instructions--item workouts-reps">
-                                                   <span class="b-workout-part--instructions--suf" translate="reps">reps</span>   {{hit.NumberOfRep}}   
+                                                   <h1 class="b-workout-part--instructions--suf" translate="reps">reps</h1>   {{hit.NumberOfRep}}   
                                                 </div>
                                                 <div class="b-workout-part--instructions--item workouts-rest">
-                                                <span class="b-workout-part--instructions--suf" translate="rest">rest</span>     0 sec 
+                                                <h1 class="b-workout-part--instructions--suf" translate="rest">rest</h1>     0 sec 
                                                 </div>
                                             </div>
                                             <div class="b-workout-part--editorial-details">
@@ -372,13 +372,13 @@
 
                                             <div class="b-workout-part--instructions">
                                                 <div class="b-workout-part--instructions--item workouts-sets">
-                                                <span class="b-workout-part--instructions--suf" translate="time">time</span>    {{hit.CoolDownDuration}}   
+                                                <h1 class="b-workout-part--instructions--suf" translate="time">time</h1>    {{hit.CoolDownDuration}}   
                                                 </div>
                                                 <div class="b-workout-part--instructions--item workouts-reps">
-                                                   <span class="b-workout-part--instructions--suf" translate="reps">reps</span> {{hit.NumberOfRep}}     
+                                                   <h1 class="b-workout-part--instructions--suf" translate="reps">reps</h1> {{hit.NumberOfRep}}     
                                                 </div>
                                                 <div class="b-workout-part--instructions--item workouts-rest">
-                                                 <span class="b-workout-part--instructions--suf" translate="rest">rest</span>   0 sec  
+                                                 <h1 class="b-workout-part--instructions--suf" translate="rest">rest</h1>   0 sec  
                                                 </div>
                                             </div>
                                             <div class="b-workout-part--editorial-details">

@@ -1,11 +1,11 @@
-﻿WDApp.controller("CompletePlansController",
-    ["$scope", "$rootScope", "$state"  , "ngCart", "WDFactory", "RESTInitialFac", "RESTStoreItems", "workoutService", "$modal","$window",
+﻿angular.module('WDApp.CompletePlans', [])
+ .controller("CompletePlansController",
+    ["$scope", "$rootScope", "$state"  , "ngCart", "WDFactory" , "RESTStoreItems", "workoutService", "$modal","$window",
 
-    function ($scope, $rootScope, $state, ngCart, WDFactory, RESTInitialFac, RESTStoreItems, workoutService, $modal, $window) {
+    function ($scope, $rootScope, $state, ngCart, WDFactory, RESTStoreItems, workoutService, $modal, $window) {
    
    
-    //initialize of main objects 
-    /////////////////////////////////
+   
     
     $scope.Pagination = {};
     $scope.DisplayModeEnum = {
@@ -48,8 +48,7 @@
      if ($scope.UserID != $scope.AdminID)
      {
         
-        // angular.element("#addWorkoutBtn").remove();
-    }
+     }
      $scope.getPlanTypeString = function (plantype) {
          if (plantype)
          {
@@ -75,22 +74,11 @@
              return "";
 
      }
-    // finish main object initialization 
-    ////////////////////////////////////
-   
-    //parameters fo pagination 
-    /////////////////////////////
+    
     $scope.Pagination.CurrentPage = 1;
      
-    $scope.maxSize = 10;
-    ////////////////////////
-
-
-    
-
-   
-        ///watch function s
-        //////////////////////////////////////
+    $scope.maxSize = 10; 
+        
    
     $scope.$watch('Pagination.CurrentPage', function (newpageValue) { 
         
@@ -114,30 +102,24 @@
    );
 
    
-    //////////////////////////////////
-    //finish watch function s 
-    ///////////////////////////////////
-
- 
-   //request for workout details if the page changed only not filter , filter change handle at homeController.js
+   
     $scope.SendStoreItemRequest = function () {
         
-        //$.blockUI({ message: '<h3>Loading Store Items...</h3>' });
-     
+      
         $scope.myPromise=   RESTStoreItems.get({
             LevelIDs: $scope.Criteria.LevelIDs, PlanTypeIDs: $scope.Criteria.PlanTypeIDs
             , ObjectiveIDs: $scope.Criteria.ObjectiveIDs, BodyParts: $scope.Criteria.BodyParts
             , PlanName: $scope.Criteria.PlanName, Isfree: $scope.Criteria.FreeOrPaid
             , DirectoryTypes: $scope.Criteria.CompleteOrDay, page: $scope.Criteria.Page
              , minWeek: $scope.Criteria.minWeek, maxWeek: $scope.Criteria.maxWeek
+            , culture: $('#hdn_tm_culture').val()
             
         }, function (respond) {
          
             $scope.Workouts = workoutService.ManageWorkouts(respond.storeList);
             
             $scope.TotalItems = respond.TotalCount;
-            //$.unblockUI();
-        });
+         });
     }
          
     $scope.goDetails = function (item) {
@@ -151,7 +133,7 @@
 
         $state.go("purchaseItems");
     }
-    // function to add free workouts to user account . 
+     
     $scope.addToAccount = function (item) {
       
         
@@ -282,7 +264,7 @@
        
     }
 
-    $scope.addWorkout = function () {  // add workout to store " for admin only "
+    $scope.addWorkout = function () {  
        
         $modal.open({
             animation: true,
